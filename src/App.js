@@ -1,15 +1,37 @@
 import './App.css';
+import React, { useState } from 'react';
+import TelaLogin from "./componentes/telaLogin";
+import TelaCadastrar from "./componentes/telaCadastrar";
+import logo from "./images/logo-smartain.png";
 
 
 function App() {
-  return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Bem-vindo ao Meu Aplicativo React</h1>
-          <p className="App-description">Esta é a minha tela inicial modificada.</p>
-        </header>
-      </div>
-  );
+    const [telaAtual, setTelaAtual] = useState('telaInicial');
+
+    const navegarParaTelaLogar = () => {
+        setTelaAtual('telaLogin');
+    };
+
+    const navegarParaTelaCadastrar = () => {
+        setTelaAtual('telaCadastrar');
+    };
+
+    return (
+            <div className="">
+               {/*Condicional para carregar telaInicial somente quando for a tela atual.*/}
+                {telaAtual === 'telaInicial' && (
+                    <div>
+                        <div className="container">
+                            <img src={logo} alt="logo"/>
+                            <button className="entrar" onClick={navegarParaTelaLogar}>Entrar</button>
+                            <button className="cadastrar" onClick={navegarParaTelaCadastrar}>Cadastrar</button>
+                        </div>
+                    </div>
+                )}
+                {telaAtual === 'telaLogin' && <TelaLogin />}
+                {telaAtual === 'telaCadastrar' && <TelaCadastrar />}
+            </div>
+    );
 }
 
 export default App;

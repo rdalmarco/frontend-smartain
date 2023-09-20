@@ -1,15 +1,19 @@
-import 'src/css/highbar.css';
+import React from "react";
+import '../css/highbar.css';
 
 
-function App() {
+function Highbar() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1 className="App-title">Bem-vindo ao Meu Aplicativo React</h1>
-                <p className="App-description">Esta é a minha tela inicial modificada.</p>
+        <div class="highbar">
+            <header>
+                <ul className="horizontal-list">
+                    <li><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                </ul>
             </header>
         </div>
     );
 }
 
-export default App;
+export default Highbar;

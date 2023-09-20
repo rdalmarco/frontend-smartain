@@ -1,0 +1,16 @@
+.bottombar {
+    position: fixed;
+    bottom : 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+}
+
+.empresa {
+    display: inline-block;
+    position: relative;
+    left: 50%; /* Move a div para o centro horizontal */
+    transform: translateX(-50%); /* Corrige a posição horizontal */
+}
