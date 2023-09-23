@@ -10,17 +10,28 @@ img {
   margin-bottom: -100px;
 }
 
-button {
-  margin: 10px;
-  border-radius: 10px;
-  height: 35px;
-  width: 200px;
-}
-
 .entrar {
+  textAlign: center;
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  margin: 5px;
+  height: 20px;
+  width: 200px;
   background-color: darkslategray;
 }
 
 .cadastrar {
+  textAlign: center;
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  margin: 5px;
+  height: 20px;
+  width: 200px;
   background-color: darkgrey;
 }

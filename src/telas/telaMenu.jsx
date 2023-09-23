@@ -1,6 +1,6 @@
 import React from "react";
-import Highbar from "./highbar";
-import Bottombar from "./bottombar";
+import Highbar from "../componentes/highbar";
+import Bottombar from "../componentes/bottombar";
 import logo from '../images/logo-smartain.png';
 import '../css/telaMenu.css'
 
