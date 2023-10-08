@@ -7,12 +7,18 @@ function TelaCadastrar() {
             <h1>Cadastro</h1>
             <div className="containerCadastrar">
                 <div className="campos">
-                    <input type="text"  placeholder="Nome"/>
-                    <input type="text"  placeholder="Email"/>
-                    <input type="text"  placeholder="Login"/>
-                    <input type="password"  placeholder="Senha"/>
-                    <input type="text"  placeholder="Unidade Fabril"/>
-                    <input type="text"  placeholder="Grupo"/>
+                    <p>Nome</p>
+                    <input className="nome" type="text" />
+                    <p>Email</p>
+                    <input className="email" type="text"/>
+                    <p>Login</p>
+                    <input className="login" type="text"/>
+                    <p>Senha</p>
+                    <input className="senha" type="password"/>
+                    <p>Unidade</p>
+                    <input className="unidade" type="text"/>
+                    <p>Grupo</p>
+                    <input className="grupo" type="text"/>
                     <Link to="/login" className="cadastrarCadastrar">Cadastrar</Link>
                 </div>
             </div>

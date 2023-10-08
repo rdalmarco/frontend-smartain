@@ -11,6 +11,7 @@
 .empresa {
     display: inline-block;
     position: relative;
-    left: 50%; /* Move a div para o centro horizontal */
-    transform: translateX(-50%); /* Corrige a posição horizontal */
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
 }

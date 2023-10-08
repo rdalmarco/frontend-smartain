@@ -5,11 +5,11 @@ import logo from "./images/logo-smartain.png";
 
 function App() {
     return (
-        <div className="container">
+        <div className="containerApp">
             <img src={logo} alt="logo"/>
             <div className="buttons">
-                <Link to="/login" className="entrar">Entrar</Link>
-                <Link to="/cadastrar" className="cadastrar">Cadastrar</Link>
+                <Link to="/login" className="entrarApp">Entrar</Link>
+                <Link to="/cadastrar" className="cadastrarApp">Cadastrar</Link>
             </div>
         </div>
     );

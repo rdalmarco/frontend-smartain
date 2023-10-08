@@ -7,8 +7,10 @@ function TelaLogin() {
             <h1>Login</h1>
             <div className="containerLogin">
                 <div className="campos">
-                    <input type="password"  placeholder="Senha"/>
-                    <input type="email"  placeholder="Email"/>
+                    <p>Email</p>
+                    <input className="email" type="text"/>
+                    <p>Senha</p>
+                    <input className="senha" type="password"/>
                     <Link to="/menu" className="logar">Logar</Link>
                 </div>
             </div>

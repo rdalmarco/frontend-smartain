@@ -1,16 +1,16 @@
-.container {
+.containerApp {
   display: flex;
-  flex-direction: column; /* Empilhe os elementos verticalmente */
-  justify-content: center; /* Centralize verticalmente */
-  align-items: center; /* Centralize horizontalmente */
-  height: 90vh; /* Preencha a altura da tela */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 img {
   margin-bottom: -100px;
 }
 
-.entrar {
+.entrarApp {
   textAlign: center;
   display: inline-block;
   padding: 10px;
@@ -23,7 +23,7 @@ img {
   background-color: darkslategray;
 }
 
-.cadastrar {
+.cadastrarApp {
   textAlign: center;
   display: inline-block;
   padding: 10px;

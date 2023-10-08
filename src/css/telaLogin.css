@@ -22,6 +22,12 @@
     border-radius: 10px;
 }
 
+.campos p {
+    margin: 0px;
+    padding-right: 265px;
+    color: white;
+}
+
 .logar {
     textAlign: center;
     display: inline-block;
