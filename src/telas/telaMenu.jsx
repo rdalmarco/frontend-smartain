@@ -9,7 +9,7 @@ function TelaMenu() {
     return (
         <div className="">
             <Highbar/>
-            <div className="container">
+            <div className="containerMenu">
                 <img src={logo} alt="logo"/>
             </div>
             <Bottombar/>
