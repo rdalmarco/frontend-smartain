@@ -1,0 +1,57 @@
+.tittleCadastro {
+    color: white;
+    margin: 10px;
+    margin-top: 0;
+    position: absolute;
+    top: 3%;
+    left: 1%;
+}
+
+.containerCadastro {
+    background-color: #333333;
+    height: 70vh;
+    width: 70%;
+    margin: auto;
+    margin-top: 3vh;
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonsCadastro {
+    position: absolute;
+    bottom: 3%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.buttonsCadastro button {
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 15px;
+}
+
+.salvarCadastro {
+    background-color: darkslategray;
+    height: 40px;
+    width: 300px;
+}
+
+.excluirCadastro {
+    background-color: red;
+    height: 40px;
+    width: 100px;
+
+}
+
+.voltarCadastro {
+    background-color: black;
+    height: 40px;
+    width: 200px;
+}

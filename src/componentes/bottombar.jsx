@@ -4,8 +4,8 @@ import '../css/bottombar.css';
 
 function Bottombar() {
     return (
-        <div class="bottombar">
-                <div class="empresa">
+        <div className="bottombar">
+                <div className="empresa">
                     <p>Rio Riosulense</p>
                 </div>
         </div>

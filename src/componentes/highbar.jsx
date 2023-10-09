@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
 import '../css/highbar.css';
 import {Link} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 
 
 function Highbar() {
     const [activeItem, setActiveItem] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(null);
 
     const handleItemClick = (item) => {
         if (activeItem === item) {
             setActiveItem(null);
+            setMenuOpen(false);
         } else {
             setActiveItem(item);
+            setMenuOpen(true);
         }
     }
+
 
     return (
         <nav className="navbar">
