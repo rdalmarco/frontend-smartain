@@ -14,7 +14,6 @@ function TarefasApp() {
                     <Route path='/cadastrar' element={<TelaCadastrar />}></Route>
                     <Route path='/menu' element={<TelaMenu />}></Route>
                     <Route path='/cadastros/setor' element={<TelaConsultaSetores />}></Route>
-                    <Route path='/cadastros/setor/cadastrar' element={}></Route>
                 </Routes>
             </BrowserRouter>
     )}

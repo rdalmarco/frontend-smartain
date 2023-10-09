@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useHistory } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import '../css/layoutConsulta.css';
 
 
@@ -9,7 +9,7 @@ function LayoutConsulta({titulo, valorUrlAdicionar}) {
     //Const para armazenar o item selecionado da div
     const [linhaSelecionada, setLinhaSelecionada] = useState(null);
     //Const para pegar id da linha e jogar pra tela de edição
-    const history = useHistory();
+    const navigate  = useNavigate();
 
     //Teste dados grid
     useEffect(() => {
@@ -28,7 +28,7 @@ function LayoutConsulta({titulo, valorUrlAdicionar}) {
     const selecionarLinha = (linha) => {
         setLinhaSelecionada(linhaSelecionada === linha ? null : linha);
         if (linha) {
-            history.push(`/cadastros/${valorUrlAdicionar}/cadastrar${linha.id}`);
+            navigate(`/cadastros/${valorUrlAdicionar}/cadastrar/${linha.id}`);
         }
     }
 
