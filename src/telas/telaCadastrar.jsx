@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
 import '../css/telaCadastrar.css';
+import React from "react";
 
 function TelaCadastrar() {
     return (
-        <div className="titleCadastrar">
+        <div className="tittleCadastrar">
             <h1>Cadastro</h1>
             <div className="containerCadastrar">
                 <div className="campos">
@@ -19,7 +20,9 @@ function TelaCadastrar() {
                     <input className="unidade" type="text"/>
                     <p>Grupo</p>
                     <input className="grupo" type="text"/>
-                    <Link to="/login" className="cadastrarCadastrar">Cadastrar</Link>
+                    <Link to="/login">
+                        <button className="cadastrarCadastrar">Cadastrar</button>
+                    </Link>
                 </div>
             </div>
         </div>

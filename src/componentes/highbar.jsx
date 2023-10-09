@@ -21,9 +21,9 @@ function Highbar() {
                     <a href="#" className="navbar-link">Cadastros</a>
                     {activeItem === 'cadastros' && (
                         <ul className="sub-menu">
-                            <li> <Link to="/UnidadeFabril">Unidade Fabril</Link></li>
-                            <li> <Link to="/Setor">Setor</Link></li>
-                            <li> <Link to="/Célula">Célula</Link></li>
+                            <li> <Link to="/cadastros/unidadefabril">Unidade Fabril</Link></li>
+                            <li> <Link to="/cadastros/setor">Setor</Link></li>
+                            <li> <Link to="/cadastros/celula">Célula</Link></li>
                         </ul>
                     )}
                 </li>
@@ -31,9 +31,9 @@ function Highbar() {
                     <a href="#" className="navbar-link">Execução</a>
                     {activeItem === 'execucoes' && (
                         <ul className="sub-menu">
-                            <li><Link to="/Manual">Manual</Link></li>
-                            <li><Link to="/Sintoma">Sintoma</Link></li>
-                            <li><Link to="/Causa">Causa</Link></li>
+                            <li><Link to="/execucao/manual">Manual</Link></li>
+                            <li><Link to="/execucao/sintoma">Sintoma</Link></li>
+                            <li><Link to="/execucao/causa">Causa</Link></li>
                         </ul>
                     )}
                 </li>
@@ -41,8 +41,8 @@ function Highbar() {
                     <a href="#" className="navbar-link">Integrações</a>
                     {activeItem === 'integracoes' && (
                         <ul className="sub-menu">
-                            <li><Link to="/Sensor">Sensor</Link></li>
-                            <li><Link to="/Configuracao">Configuração</Link></li>
+                            <li><Link to="/integracoes/sensor">Sensor</Link></li>
+                            <li><Link to="/integracoes/configuracao">Configuração</Link></li>
                         </ul>
                     )}
                 </li>
@@ -50,8 +50,8 @@ function Highbar() {
                     <a href="#" className="navbar-link">Indicadores</a>
                     {activeItem === 'indicadores' && (
                         <ul className="sub-menu">
-                            <li><Link to="/Metas">Metas</Link></li>
-                            <li><Link to="/Relatorios">Relatorios</Link></li>
+                            <li><Link to="/indicadores/metas">Metas</Link></li>
+                            <li><Link to="/indicadores/relatorios">Relatorios</Link></li>
                         </ul>
                     )}
                 </li>
@@ -59,12 +59,12 @@ function Highbar() {
                     <a href="#" className="navbar-link">Configurações</a>
                     {activeItem === 'configuracoes' && (
                         <ul className="sub-menu">
-                            <li><Link to="/Sistema">Sistema</Link></li>
-                            <li><Link to="/Usuarios">Usuários</Link></li>
-                            <li><Link to="/Grupos">Grupos</Link></li>
-                            <li><Link to="/Privilegios">Privilégios</Link></li>
-                            <li><Link to="/Parametros">Parâmetros</Link></li>
-                            <li><Link to="/Alertas">Alertas</Link></li>
+                            <li><Link to="/configuracoes/sistema">Sistema</Link></li>
+                            <li><Link to="/configuracoes/usuarios">Usuários</Link></li>
+                            <li><Link to="/configuracoes/grupos">Grupos</Link></li>
+                            <li><Link to="/configuracoes/privilegios">Privilégios</Link></li>
+                            <li><Link to="/configuracoes/parametros">Parâmetros</Link></li>
+                            <li><Link to="/configuracoes/alertas">Alertas</Link></li>
                         </ul>
                     )}
                 </li>

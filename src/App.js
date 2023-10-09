@@ -8,8 +8,12 @@ function App() {
         <div className="containerApp">
             <img src={logo} alt="logo"/>
             <div className="buttons">
-                <Link to="/login" className="entrarApp">Entrar</Link>
-                <Link to="/cadastrar" className="cadastrarApp">Cadastrar</Link>
+                <Link to="/login">
+                    <button className="entrarApp">Entrar</button>
+                </Link>
+                <Link to="/cadastrar">
+                   <button className="cadastrarApp">Cadastrar</button>
+                </Link>
             </div>
         </div>
     );

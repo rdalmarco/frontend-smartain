@@ -1,4 +1,4 @@
-.titleCadastrar {
+.tittleCadastrar {
     text-align: center;
 }
 
@@ -37,7 +37,7 @@
     text-decoration: none;
     border-radius: 10px;
     margin: 25px;
-    height: 20px;
+    height: 40px;
     width: 300px;
     background-color: darkslategray;
 }

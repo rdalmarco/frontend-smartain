@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
 import '../css/telaLogin.css';
+import React from "react";
 
 function TelaLogin() {
     return (
-        <div className="titleLogin">
+        <div className="tittleLogin">
             <h1>Login</h1>
             <div className="containerLogin">
                 <div className="campos">
@@ -11,7 +12,9 @@ function TelaLogin() {
                     <input className="email" type="text"/>
                     <p>Senha</p>
                     <input className="senha" type="password"/>
-                    <Link to="/menu" className="logar">Logar</Link>
+                    <Link to="/menu">
+                        <button className="logar">Logar</button>
+                    </Link>
                 </div>
             </div>
         </div>
