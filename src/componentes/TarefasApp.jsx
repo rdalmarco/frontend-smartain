@@ -5,6 +5,8 @@ import TelaMenu from "../telas/telaMenu";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TelaConsultaSetores from "../telas/telaConsultaSetores";
 import TelaCadastrarSetor from "../telas/telaCadastrarSetor";
+import TelaConsultaUnidadesFabril from "../telas/telaConsultaUnidadesFabril";
+import TelaCadastrarUnidadeFabril from "../telas/telaCadastrarUnidadeFabril";
 
 function TarefasApp() {
     return (
@@ -16,6 +18,8 @@ function TarefasApp() {
                     <Route path='/menu' element={<TelaMenu />}></Route>
                     <Route path='/cadastros/setor' element={<TelaConsultaSetores />}></Route>
                     <Route path='/cadastros/setor/cadastrar' element={<TelaCadastrarSetor />} />
+                    <Route path='/cadastros/unidadefabril' element={<TelaConsultaUnidadesFabril />} />
+                    <Route path='/cadastros/unidadefabril/cadastrar' element={<TelaCadastrarUnidadeFabril />} />
                     <Route path='/cadastros/celula/cadastrar' element={<TelaCadastrarSetor />} />
                 </Routes>
             </BrowserRouter>

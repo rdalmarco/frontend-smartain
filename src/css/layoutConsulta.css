@@ -14,15 +14,21 @@
 .filtro button {
     textAlign: center;
     display: inline-block;
-    color: #fff;
+    color: white;
     text-decoration: none;
     border-radius: 10px;
     margin: 10px;
     background-color: darkslategray;
 }
+
 .filtro input {
     color: white;
 }
+
+.filtro input::placeholder {
+    color: white;
+}
+
 
 .filtrar {
     height: 40px;
@@ -44,16 +50,25 @@
     border-radius: 10px;
 }
 
+.filtro select {
+    width: 300px;
+    height: 30px;
+    background-color: black;
+    margin: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
 .table {
     width: 98%;
-    border-collapse: collapse;
     margin-top: 20px;
     position: relative;
     left: 1%;
+    border-radius: 15px; /* Adiciona cantos arredondados */
+    overflow: hidden;
 }
 
 .table th, .table td {
-    border: 1px solid white;
     padding: 10px;
     text-align: center;
     background-color: white;
@@ -65,3 +80,30 @@
     color: white;
 }
 
+.pager {
+    position: fixed;
+    bottom: 15%; /* Ajuste conforme necessário para a distância do fundo */
+    left: 50%; /* Coloca o pager no centro da largura da tela */
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* Ajuste o tamanho da fonte conforme necessário */
+    color: white;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.pager button {
+    margin: 0 5px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.pager input {
+    background-color: black;
+    color: white;
+    margin: 10px;
+    border-radius: 10px;
+}

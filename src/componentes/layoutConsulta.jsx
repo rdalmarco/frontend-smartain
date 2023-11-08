@@ -1,94 +1,142 @@
-import React, {useEffect, useState} from "react";
-import {Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useTable, usePagination } from 'react-table';
 import '../css/layoutConsulta.css';
+import { Link } from 'react-router-dom';
 
+function LayoutConsulta({ titulo, valorUrlAdicionar, dados }) {
+    const [filterValue, setFilterValue] = useState('');
+    const [selectedField, setSelectedField] = useState('');
 
-function LayoutConsulta({titulo, valorUrlAdicionar}) {
-    //Const dados para receber da requisição
-    const [dados, setDados] = useState([]);
-    //Const para armazenar o item selecionado da div
-    const [linhaSelecionada, setLinhaSelecionada] = useState(null);
-    //Const para pegar id da linha e jogar pra tela de edição
-    const navigate  = useNavigate();
+    const handleFilterChange = (e) => {
+        setFilterValue(e.target.value);
+    };
 
-    //Teste dados grid
-    useEffect(() => {
-        const novosDados = [
-            [
-                { id: 1, nome: 'Item 1', descricao: 'X1', valor : 10},
-                { id: 2, nome: 'Item 2', descricao: 'X2', valor : 20},
-                { id: 3, nome: 'Item 3', descricao: 'X3', valor : 30},
-                { id: 4, nome: 'Item 4', descricao: 'X4', valor : 40}
-            ],
-        ];
+    const handleFieldChange = (e) => {
+        setSelectedField(e.target.value);
+    };
 
-        setDados(novosDados);
-    }, []);
+    const columns = React.useMemo(
+        () =>
+            dados.length > 0
+                ? Object.keys(dados[0][0]).map(chave => {
+                    return {
+                        Header: chave,
+                        accessor: chave,
+                    };
+                })
+                : [],
+        [dados]
+    );
 
-    const selecionarLinha = (linha) => {
-        setLinhaSelecionada(linhaSelecionada === linha ? null : linha);
-        if (linha) {
-            navigate(`/cadastros/${valorUrlAdicionar}/cadastrar/${linha.id}`);
+    const filteredData = React.useMemo(() => {
+        if (selectedField && filterValue) {
+            return dados[0].filter(item =>
+                String(item[selectedField]).toLowerCase().includes(filterValue.toLowerCase())
+            );
         }
-    }
+        return dados[0];
+    }, [selectedField, filterValue, dados]);
 
-    const gerarCabecalho = () => {
-        if (dados.length > 0) {
-            return Object.keys(dados[0][0]).map((chave, index) => (
-                <th key={index}>{chave}</th>
-            ));
-        }
-        return null;
-    }
-
-    const gerarLinhas = () => {
-        if (dados.length > 0) {
-            return dados[0].map(item => (
-                <tr key={item.id} className={linhaSelecionada === item ? 'selecionada' : ''} onClick={() => selecionarLinha(item)}>
-                    {Object.values(item).map((valor, index) => (
-                        <td key={index}>
-                            {valor}
-                        </td>
-                    ))}
-                </tr>
-            ));
-        }
-        return null;
-    }
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page, // Substitua 'rows' por 'page'
+        prepareRow,
+        state: { pageIndex, pageSize }, // Adicione o state para controle da paginação
+        gotoPage,
+        nextPage,
+        previousPage,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        pageCount,
+    } = useTable(
+        {
+            columns,
+            data: filteredData,
+            initialState: { pageIndex: 0, pageSize: 7}, // Defina o estado inicial da paginação
+        },
+        usePagination // Adicione o hook de paginação
+    );
 
     return (
         <div className="containerConsulta">
             <h1 className="tittleConsulta">{titulo}</h1>
             <div className="filtro">
-                <input className="filtro" type="text"/>
-                <button className="filtrar" type="submit">Filtrar</button>
+                <select
+                    value={selectedField}
+                    onChange={handleFieldChange}
+                >
+                    <option value="">Selecione um campo</option>
+                    {columns.map(column => (
+                        <option key={column.id} value={column.accessor}>
+                            {column.Header}
+                        </option>
+                    ))}
+                </select>
+                <input
+                    type="text"
+                    value={filterValue}
+                    onChange={handleFilterChange}
+                    placeholder="Digite o valor de filtragem"
+                />
+                <button className="filtrar" type="submit">
+                    Filtrar
+                </button>
                 <Link to={`/cadastros/${valorUrlAdicionar}/cadastrar`}>
                     <button className="adicionar">Adicionar</button>
                 </Link>
             </div>
             <div>
-                <table className="table">
+                <table {...getTableProps()} className="table">
                     <thead>
-                    <tr>
-                        {gerarCabecalho()}
-                    </tr>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                            ))}
+                        </tr>
+                    ))}
                     </thead>
-                    <tbody>
-                    {gerarLinhas()}
+                    <tbody {...getTableBodyProps()}>
+                    {page.map(row => {
+                        prepareRow(row);
+                        return (
+                            <tr
+                                {...row.getRowProps()}
+                                className={row.isSelected ? 'selecionada' : ''}
+                                onClick={() => {
+                                    // Adicione aqui o código para lidar com a seleção de linha, se necessário.
+                                }}
+                            >
+                                {row.cells.map(cell => {
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                                })}
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
-                {linhaSelecionada && (
-                    <div>
-                        <h2>Linha Selecionada:</h2>
-                        <p>ID: {linhaSelecionada.id}</p>
-                        <p>Nome: {linhaSelecionada.nome}</p>
-                        <p>Valor: {linhaSelecionada.valor}</p>
-                    </div>
-                )}
+            </div>
+            <div className="pager">
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    {'<'}
+                </button>{' '}
+                <span>
+          Página{' '}
+                    <strong>
+            {pageIndex + 1} de {pageOptions.length}
+          </strong>{' '}
+        </span>
+                <span>
+        </span>
+                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                    {'>'}
+                </button>{' '}
             </div>
         </div>
-    )
-        ;
+    );
 }
 
 export default LayoutConsulta;
