@@ -28,6 +28,15 @@ function Highbar() {
                             <li> <Link to="/cadastros/unidadefabril">Unidade Fabril</Link></li>
                             <li> <Link to="/cadastros/setor">Setor</Link></li>
                             <li> <Link to="/cadastros/celula">Célula</Link></li>
+                            <li> <Link to="/cadastros/fabricante">Fabricante</Link></li>
+                            <li> <Link to="/cadastros/modelo">Modelo</Link></li>
+                            <li> <Link to="/cadastros/maquina">Maquina</Link></li>
+                            <li> <Link to="/cadastros/equipamento">Equipamento</Link></li>
+                            <li> <Link to="/cadastros/componente">Componente</Link></li>
+                            <li> <Link to="/cadastros/manual">Manual</Link></li>
+                            <li> <Link to="/cadastros/ordem">Ordem</Link></li>
+                            <li> <Link to="/cadastros/plano">Plano</Link></li>
+                            <li> <Link to="/cadastros/alerta">Alerta</Link></li>
                         </ul>
                     )}
                 </li>

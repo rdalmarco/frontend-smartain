@@ -7,6 +7,15 @@ import TelaConsultaSetores from "../telas/telaConsultaSetores";
 import TelaCadastrarSetor from "../telas/telaCadastrarSetor";
 import TelaConsultaUnidadesFabril from "../telas/telaConsultaUnidadesFabril";
 import TelaCadastrarUnidadeFabril from "../telas/telaCadastrarUnidadeFabril";
+import TelaConsultaComponentes from "../telas/telaConsultaComponentes";
+import TelaConsultaEquipamentos from "../telas/telaConsultaComponentes";
+import TelaConsultaFabricantes from "../telas/telaConsultaFabricantes";
+import TelaConsultaManuais from "../telas/telaConsultaManuais";
+import TelaConsultaMaquinas from "../telas/telaConsultaMaquinas";
+import TelaConsultaModelos from "../telas/telaConsultaModelos";
+import TelaConsultaOrdens from "../telas/telaConsultaOrdens";
+import TelaConsultaPlanos from "../telas/telaConsultaPlanos";
+import TelaConsultaAlertas from "../telas/telaConsultaAlertas";
 
 function TarefasApp() {
     return (
@@ -21,6 +30,15 @@ function TarefasApp() {
                     <Route path='/cadastros/unidadefabril' element={<TelaConsultaUnidadesFabril />} />
                     <Route path='/cadastros/unidadefabril/cadastrar' element={<TelaCadastrarUnidadeFabril />} />
                     <Route path='/cadastros/celula/cadastrar' element={<TelaCadastrarSetor />} />
+                    <Route path='/cadastros/componente' element={<TelaConsultaComponentes />} />
+                    <Route path='/cadastros/equipamento' element={<TelaConsultaEquipamentos />} />
+                    <Route path='/cadastros/fabricante' element={<TelaConsultaFabricantes />} />
+                    <Route path='/cadastros/manual' element={<TelaConsultaManuais />} />
+                    <Route path='/cadastros/maquina' element={<TelaConsultaMaquinas />} />
+                    <Route path='/cadastros/modelo' element={<TelaConsultaModelos />} />
+                    <Route path='/cadastros/ordem' element={<TelaConsultaOrdens />} />
+                    <Route path='/cadastros/plano' element={<TelaConsultaPlanos />} />
+                    <Route path='/cadastros/alerta' element={<TelaConsultaAlertas />} />
                 </Routes>
             </BrowserRouter>
     )}

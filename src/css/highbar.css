@@ -33,6 +33,7 @@
     border-radius: 5px;
     width: 100px;
     list-style-type: none;
+    z-index: 100;
 }
 
 .navbar-item:hover .sub-menu {
