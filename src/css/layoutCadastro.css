@@ -37,21 +37,11 @@
     margin: 15px;
 }
 
-.salvarCadastro {
-    background-color: darkslategray;
-    height: 40px;
-    width: 300px;
-}
-
-.excluirCadastro {
-    background-color: red;
-    height: 40px;
-    width: 100px;
-
-}
-
 .voltarCadastro {
+    position: relative;
+    left: 100%;
     background-color: black;
     height: 40px;
     width: 200px;
+
 }
