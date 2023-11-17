@@ -34,7 +34,7 @@ const CampoInput = ({ label, type, defaultValue, onChange }) => {
     );
 };
 
-function FormsCadastro({ campos, backEndUrl})  {
+function FormsCadastro({campos, backEndUrl})  {
     const [valoresCampos, setValoresCampos] = useState({});
 
     useEffect(() => {

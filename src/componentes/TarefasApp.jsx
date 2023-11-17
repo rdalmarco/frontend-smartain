@@ -18,6 +18,7 @@ import TelaConsultaPlanos from "../telas/telaConsultaPlanos";
 import TelaConsultaAlertas from "../telas/telaConsultaAlertas";
 import TelaCadastrarCelula from "../telas/telaCadastrarCelula";
 import TelaConsultaCelulas from "../telas/telaConsultaCelulas";
+import TelaAlterarUnidadeFabril from "../telas/telaAlterarUnidadeFabril";
 
 function TarefasApp() {
     return (
@@ -31,6 +32,7 @@ function TarefasApp() {
                     <Route path='/cadastros/setor/cadastrar' element={<TelaCadastrarSetor />} />
                     <Route path='/cadastros/unidadefabril' element={<TelaConsultaUnidadesFabril />} />
                     <Route path='/cadastros/unidadefabril/cadastrar' element={<TelaCadastrarUnidadeFabril />} />
+                    <Route path='/cadastros/unidadefabril/alterar/:id' element={<TelaAlterarUnidadeFabril />} />
                     <Route path='/cadastros/celula/' element={<TelaConsultaCelulas />} />
                     <Route path='/cadastros/celula/cadastrar' element={<TelaCadastrarCelula />} />
                     <Route path='/cadastros/componente' element={<TelaConsultaComponentes />} />
@@ -42,6 +44,7 @@ function TarefasApp() {
                     <Route path='/cadastros/ordem' element={<TelaConsultaOrdens />} />
                     <Route path='/cadastros/plano' element={<TelaConsultaPlanos />} />
                     <Route path='/cadastros/alerta' element={<TelaConsultaAlertas />} />
+
                 </Routes>
             </BrowserRouter>
     )}

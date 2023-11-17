@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTable, usePagination } from 'react-table';
 import '../css/layoutConsulta.css';
 import { Link } from 'react-router-dom';
+import FormsCadastro from "./formsCadastro";
 
 function LayoutConsulta({ titulo, valorUrlAdicionar, dados }) {
     const [filterValue, setFilterValue] = useState('');
@@ -104,11 +105,12 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados }) {
                         prepareRow(row);
                         return (
                             <tr
-                                key={row.original.Id} //
+                                key={row.original.Id}
                                 {...row.getRowProps()}
-                                className={row.isSelected ? 'selecionada' : ''}
+                                className={`${row.isSelected ? 'selecionada' : ''} clickable-row`}
                                 onClick={() => {
-                                    // Adicione aqui o código para lidar com a seleção de linha, se necessário.
+                                    const id = row.original.Id;
+                                    window.location.href = `/cadastros/${valorUrlAdicionar}/alterar/${id}`;
                                 }}
                             >
                                 {row.cells.map(cell => {
