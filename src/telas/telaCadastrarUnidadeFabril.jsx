@@ -57,24 +57,39 @@ function TelaCadastrarUnidadeFabril() {
 
     const camposFormulario = [
         {
+            tipo: 'hidden',
+            label: 'customerId',
+            tipoCampo: 'text',
+            defaultValue: 1,
+            tipoValue: 'int',
+        },
+        {
             tipo: 'input',
-            label: 'Nome',
+            label: 'tag',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
-            label: 'Cidade',
+            label: 'cityId',
             opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
+            tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'Endereço',
+            label: 'address',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
-            label: 'Tipos',
+            label: 'typeId',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
+            tipoValue: 'int',
+        },
+        {
+            tipo: 'hidden',
+            label: 'status',
+            tipoCampo: 'text',
+            defaultValue: 'ACTIVE',
         },
     ];
 

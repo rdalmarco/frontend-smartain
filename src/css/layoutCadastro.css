@@ -38,8 +38,9 @@
 }
 
 .voltarCadastro {
-    position: relative;
-    left: 100%;
+    position: absolute;
+    left: 60%;
+    bottom: 3%;
     background-color: black;
     height: 40px;
     width: 200px;

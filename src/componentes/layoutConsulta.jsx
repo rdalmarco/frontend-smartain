@@ -104,6 +104,7 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados }) {
                         prepareRow(row);
                         return (
                             <tr
+                                key={row.original.Id} //
                                 {...row.getRowProps()}
                                 className={row.isSelected ? 'selecionada' : ''}
                                 onClick={() => {

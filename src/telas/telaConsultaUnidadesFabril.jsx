@@ -24,7 +24,8 @@ function TelaConsultaUnidadesFabris() {
 
                 // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatados = data.map(item => ({
-                    Nome: item.customer.fantasyName,
+                    Id: item.id,
+                    Nome: item.tag,
                     Cidade: item.city.name,
                     Tipo: item.type.description,
                     Status: item.status,
@@ -35,25 +36,6 @@ function TelaConsultaUnidadesFabris() {
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
-
-
-    //Aqui será recebido os dados do backend
-     const x = [
-        [
-            { Nome: 'Fabrica 1', Cidade: 'Rio do Sul', Tipo: '1', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-            { Nome: 'Fabrica 2', Cidade: 'Rio do Sul', Tipo: '3', Status:'Ativa'},
-        ],
-    ];
 
     return (
         <div className="">
