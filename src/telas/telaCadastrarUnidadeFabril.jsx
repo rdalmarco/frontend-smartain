@@ -1,4 +1,3 @@
-import '../css/telaCadastrarUnidadeFabril.css';
 import React, { useState, useEffect } from "react";
 import LayoutCadastro from "../componentes/layoutCadastro";
 import Highbar from "../componentes/highbar";

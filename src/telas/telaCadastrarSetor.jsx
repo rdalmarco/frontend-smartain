@@ -1,55 +1,78 @@
-import '../css/telaCadastrarSetor.css';
 import React, { useState, useEffect } from "react";
 import LayoutCadastro from "../componentes/layoutCadastro";
 import Highbar from "../componentes/highbar";
 import Bottombar from "../componentes/bottombar";
+import FormsCadastro from "../componentes/formsCadastro";
 
 function TelaCadastrarSetor() {
-    //Const para armazenar as opções da lista
-    const [unidadesFabris, setUnidadesFabris] = useState([]);
-
-    const carregarUnidadesFabris = async () => {
-        try {
-            const response = await fetch("URL_DO_BACKEND_AQUI");
-            const data = await response.json();
-            setUnidadesFabris(data); // Atualiza o estado com os dados do backend
-        } catch (error) {
-            console.error("Erro ao carregar unidades fabris:", error);
-        }
-    };
+    const backendUrl = 'http://localhost:8090'
+    const [units, setUnits] = useState([]);
 
     useEffect(() => {
-        carregarUnidadesFabris();
+        fetchUnit();
     }, []);
 
-    const handleSelectChange = (e) => {
-        // Remove a opção "Unidades Fabris" quando uma seleção real é feita
-        const option = e.target.querySelector('option[value="placeholder"]');
-        if (option) {
-            option.remove();
-        }
 
-        const selectedOption = e.target.value;
-        // Faça algo com a opção selecionada, se necessário
-    };
+    function fetchUnit() {
+        fetch(`${backendUrl}/api/glo/manufacturingUnit`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+
+                // Mapeia os dados recebidos do backend para o formato desejado
+                const dadosUnit = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
+                }));
+
+                // Atualiza o estado usando setDadosUnidades
+                setUnits(dadosUnit);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    const camposFormulario = [
+        {
+            tipo: 'select',
+            label: 'unit',
+            opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
+            tipoValue: 'int',
+        },
+        {
+            tipo: 'input',
+            label: 'name',
+            tipoCampo: 'text',
+        },
+        {
+            tipo: 'input',
+            label: 'tag',
+            tipoCampo: 'text',
+        },
+        {
+            tipo: 'input',
+            label: 'description',
+            tipoCampo: 'text',
+        },
+        {
+            tipo: 'hidden',
+            label: 'status',
+            tipoCampo: 'text',
+            defaultValue: 'ACTIVE',
+        },
+        {
+            tipo: 'hidden',
+            label: 'createdDate',
+            tipoCampo: 'text',
+            defaultValue: '17/11/2023',
+        },
+    ];
 
     return (
         <div className="tittleCadastrarSetor">
             <Highbar/>
             <LayoutCadastro titulo="Setor" valorUrlAdicionar="setor">
-            <div className="camposCadastrarSetor">
-                <input type="text" placeholder="Nome"/>
-                <select onChange={handleSelectChange}>
-                    <option value="placeholder" disabled selected>Unidades Fabris</option>
-                    {unidadesFabris.map((unidade) => (
-                        <option key={unidade.id} value={unidade.id}>
-                            {unidade.nome}
-                        </option>
-                    ))}
-                </select>
-                <input type="text" placeholder="Identificador"/>
-                <input type="text" placeholder="Descricao"/>
-            </div>
+             <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/sector`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

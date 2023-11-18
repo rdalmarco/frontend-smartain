@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import '../css/formsCadastro.css'
-import {useParams} from "react-router-dom";
+import '../css/forms.css'
+import {useNavigate , useParams} from "react-router-dom";
 
 const CampoSelect = ({ label, options, defaultValue, onChange }) => {
     const [selectedValue, setSelectedValue] = useState(defaultValue);
@@ -43,9 +43,10 @@ const CampoInput = ({ label, type, defaultValue, onChange }) => {
     );
 };
 
-function FormsAlterar({campos, backEndUrl})  {
+function FormsAlterar({campos, backEndUrl })  {
     const [valoresCampos, setValoresCampos] = useState({});
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -72,16 +73,21 @@ function FormsAlterar({campos, backEndUrl})  {
     };
 
     const handleDelete = async () => {
-        try {
-            const response = await fetch(`${backEndUrl}/${id}`, {
-                method: 'DELETE',
-            });
+        const confirmDelete = window.confirm('Tem certeza que deseja excluir?', );
 
-            console.log('Resposta da requisição de exclusão:', response);
+        if (confirmDelete) {
+            try {
+                const response = await fetch(`${backEndUrl}/${id}`, {
+                    method: 'DELETE',
+                });
 
-            // Faça algo após a exclusão, como redirecionar para outra página, etc.
-        } catch (error) {
-            console.error('Erro ao excluir:', error);
+                console.log('Resposta da requisição de exclusão:', response);
+                navigate(-1);
+
+                // Faça algo após a exclusão, como redirecionar para outra página, etc.
+            } catch (error) {
+                console.error('Erro ao excluir:', error);
+            }
         }
     };
 
@@ -107,6 +113,8 @@ function FormsAlterar({campos, backEndUrl})  {
 
 
             console.log('Resposta da requisição:', response);
+            window.alert('Alterado com sucesso!');
+            navigate(-1)
 
 
         } catch (error) {
@@ -142,8 +150,8 @@ function FormsAlterar({campos, backEndUrl})  {
                 }
                 return null;
             })}
-            <button type="submit" className="formsCadastro">Enviar</button>
-            <button type="button" className="formsCadastro" onClick={handleDelete}>Excluir</button>
+            <button type="submit" className="formsEnviar">Enviar</button>
+            <button type="button" className="formsExcluir" onClick={handleDelete}>Excluir</button>
         </form>
     );
 };

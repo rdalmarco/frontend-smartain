@@ -13,7 +13,7 @@ select.formsCadastro {
     color: dimgray;
 }
 
-button.formsCadastro {
+button.formsEnviar {
         display: flex;
         justify-content: center;
         width: 70%;
@@ -23,6 +23,18 @@ button.formsCadastro {
         border-radius: 10px;
         margin: 15px;
         background-color: darkslategray;
+}
+
+button.formsExcluir {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 15px;
+    background-color: firebrick;
 }
 
 

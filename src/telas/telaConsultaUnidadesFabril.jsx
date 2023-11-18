@@ -16,6 +16,7 @@ function TelaConsultaUnidadesFabris() {
     useEffect(() => {
         console.log('Dados atualizados:', dadosUnidades);
     }, [dadosUnidades]);
+
     function fetchDataFromBackend() {
         fetch(`${backendUrl}/api/glo/manufacturingUnit`)
             .then(response => response.json())

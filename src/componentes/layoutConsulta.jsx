@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useTable, usePagination } from 'react-table';
 import '../css/layoutConsulta.css';
 import { Link } from 'react-router-dom';
-import FormsCadastro from "./formsCadastro";
+import { useEffect } from 'react';
+import FormsAlterar from "./formsAlterar";
 
-function LayoutConsulta({ titulo, valorUrlAdicionar, dados }) {
+function LayoutConsulta({ titulo, valorUrlAdicionar, dados  }) {
     const [filterValue, setFilterValue] = useState('');
     const [selectedField, setSelectedField] = useState('');
 

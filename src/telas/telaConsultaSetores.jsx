@@ -8,8 +8,8 @@ function TelaConsultaSetores() {
     //Aqui será recebido os dados do backend
     const dadosSetores = [
         [
-            { Nome: 'Setor 1', Unidade: 'Fabrica 1',  Status:'Ativo'},
-            { Nome: 'Setor 2', Unidade: 'Fabrica 2',  Status:'Ativo'}
+            { Id: '1', Nome: 'Setor 1', Unidade: 'Fabrica 1',  Status:'Ativo'},
+            { Id: '2', Nome: 'Setor 2', Unidade: 'Fabrica 2',  Status:'Ativo'}
         ],
     ];
 

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import '../css/formsCadastro.css'
+import {useNavigate} from 'react-router-dom';
+import '../css/forms.css'
 
 const CampoSelect = ({ label, options, onChange }) => {
     const handleChange = (e) => {
@@ -35,6 +36,7 @@ const CampoInput = ({ label, type, defaultValue, onChange }) => {
 };
 
 function FormsCadastro({campos, backEndUrl})  {
+    const navigate = useNavigate();
     const [valoresCampos, setValoresCampos] = useState({});
 
     useEffect(() => {
@@ -72,6 +74,7 @@ function FormsCadastro({campos, backEndUrl})  {
             });
 
             console.log('Resposta da requisição:', response);
+            navigate(-1)
 
 
         } catch (error) {
@@ -106,7 +109,7 @@ function FormsCadastro({campos, backEndUrl})  {
                 }
                 return null;
             })}
-            <button type="submit" className="formsCadastro">Enviar</button>
+            <button type="submit" className="formsEnviar">Enviar</button>
         </form>
     );
 };

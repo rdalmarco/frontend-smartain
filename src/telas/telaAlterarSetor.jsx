@@ -6,22 +6,19 @@ import FormsCadastro from "../componentes/formsCadastro";
 import FormsAlterar from "../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
 
-function TelaAlterarUnidadeFabril() {
+function TelaAlterarSetor() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [dadosSetor, setDadosSetor] = useState([]);
+    const [units, setUnits] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
-        fetchValues();
-        fetchCity();
-        fetchType();
+        fetchValuesSetor();
+        fetchUnit();
     }, []);
 
-    function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+    function fetchValuesSetor() {
+        fetch(`${backendUrl}/api/mhu/sector/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -38,82 +35,52 @@ function TelaAlterarUnidadeFabril() {
 
                 console.log('XZ', dadosFormatadosAlterar)
                 // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosSetor([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchUnit() {
+        fetch(`${backendUrl}/api/glo/manufacturingUnit`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
 
                 // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosUnit = data.map(item => ({
                     Id: item.id,
-                    Nome: item.name
+                    Nome: item.tag
                 }));
 
                 // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                setUnits(dadosUnit);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
-            tipoCampo: 'text',
-            value: 1,
+            tipo: 'select',
+            label: 'unit',
+            opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
+            value: dadosSetor && dadosSetor.length > 0 && dadosSetor[0].Status,
             tipoValue: 'int',
+        },
+        {
+            tipo: 'input',
+            label: 'name',
+            tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'tag',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
-        },
-        {
-            tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
-            tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'address',
+            label: 'description',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
-        },
-        {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
-            tipoValue: 'int',
         },
         {
             tipo: 'select',
@@ -122,15 +89,21 @@ function TelaAlterarUnidadeFabril() {
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosSetor && dadosSetor.length > 0 && dadosSetor[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
+        },
+        {
+            tipo: 'hidden',
+            label: 'createdDate',
+            tipoCampo: 'text',
+            defaultValue: '17/11/2023',
         },
     ];
 
     return (
         <div className="tittleCadastrarUnidadeFabril">
             <Highbar/>
-            <LayoutCadastro titulo="Unidade Fabril" valorUrlAdicionar="unidadefabril">
+            <LayoutCadastro titulo="Setor" valorUrlAdicionar="setor">
                 <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/manufacturingUnit`} />
             </LayoutCadastro>
             <Bottombar/>
@@ -138,4 +111,4 @@ function TelaAlterarUnidadeFabril() {
     );
 }
 
-export default TelaAlterarUnidadeFabril;
+export default TelaAlterarSetor;
