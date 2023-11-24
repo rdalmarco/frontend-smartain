@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import '../css/telaCadastrar.css';
+import '../../css/telaCadastrar.css';
 import React from "react";
 
 function TelaCadastrar() {

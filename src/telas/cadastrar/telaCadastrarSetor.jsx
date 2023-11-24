@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import LayoutCadastro from "../componentes/layoutCadastro";
-import Highbar from "../componentes/highbar";
-import Bottombar from "../componentes/bottombar";
-import FormsCadastro from "../componentes/formsCadastro";
+import LayoutCadastro from "../../componentes/layoutCadastro";
+import Highbar from "../../componentes/highbar";
+import Bottombar from "../../componentes/bottombar";
+import FormsCadastro from "../../componentes/formsCadastro";
 
 function TelaCadastrarSetor() {
     const backendUrl = 'http://localhost:8090'

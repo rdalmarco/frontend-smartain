@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import LayoutCadastro from "../componentes/layoutCadastro";
-import Highbar from "../componentes/highbar";
-import Bottombar from "../componentes/bottombar";
-import FormsCadastro from "../componentes/formsCadastro";
-import FormsAlterar from "../componentes/formsAlterar";
+import LayoutCadastro from "../../componentes/layoutCadastro";
+import Highbar from "../../componentes/highbar";
+import Bottombar from "../../componentes/bottombar";
+import FormsCadastro from "../../componentes/formsCadastro";
+import FormsAlterar from "../../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
 
 function TelaAlterarSetor() {

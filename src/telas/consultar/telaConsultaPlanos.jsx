@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
-import Highbar from "../componentes/highbar";
-import Bottombar from "../componentes/bottombar";
+import Highbar from "../../componentes/highbar";
+import Bottombar from "../../componentes/bottombar";
 import React from "react";
-import LayoutConsulta from "../componentes/layoutConsulta";
+import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaPlanos() {
     //Aqui será recebido os dados do backend

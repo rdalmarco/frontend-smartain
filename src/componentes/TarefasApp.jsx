@@ -1,25 +1,35 @@
 import App from "../App";
 import TelaLogin from "../telas/telaLogin";
-import TelaCadastrar from "../telas/telaCadastrar";
+import TelaCadastrar from "../telas/cadastrar/telaCadastrar";
 import TelaMenu from "../telas/telaMenu";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TelaConsultaSetores from "../telas/telaConsultaSetores";
-import TelaCadastrarSetor from "../telas/telaCadastrarSetor";
-import TelaConsultaUnidadesFabril from "../telas/telaConsultaUnidadesFabril";
-import TelaCadastrarUnidadeFabril from "../telas/telaCadastrarUnidadeFabril";
-import TelaConsultaComponentes from "../telas/telaConsultaComponentes";
-import TelaConsultaEquipamentos from "../telas/telaConsultaComponentes";
-import TelaConsultaFabricantes from "../telas/telaConsultaFabricantes";
-import TelaConsultaManuais from "../telas/telaConsultaManuais";
-import TelaConsultaMaquinas from "../telas/telaConsultaMaquinas";
-import TelaConsultaModelos from "../telas/telaConsultaModelos";
-import TelaConsultaOrdens from "../telas/telaConsultaOrdens";
-import TelaConsultaPlanos from "../telas/telaConsultaPlanos";
-import TelaConsultaAlertas from "../telas/telaConsultaAlertas";
-import TelaCadastrarCelula from "../telas/telaCadastrarCelula";
-import TelaConsultaCelulas from "../telas/telaConsultaCelulas";
-import TelaAlterarUnidadeFabril from "../telas/telaAlterarUnidadeFabril";
-import TelaAlterarSetor from "../telas/telaAlterarSetor";
+import TelaConsultaSetores from "../telas/consultar/telaConsultaSetores";
+import TelaCadastrarSetor from "../telas/cadastrar/telaCadastrarSetor";
+import TelaConsultaUnidadesFabril from "../telas/consultar/telaConsultaUnidadesFabril";
+import TelaCadastrarUnidadeFabril from "../telas/cadastrar/telaCadastrarUnidadeFabril";
+import TelaConsultaComponentes from "../telas/consultar/telaConsultaComponentes";
+import TelaConsultaEquipamentos from "../telas/consultar/telaConsultaComponentes";
+import TelaConsultaFabricantes from "../telas/consultar/telaConsultaFabricantes";
+import TelaConsultaManuais from "../telas/consultar/telaConsultaManuais";
+import TelaConsultaMaquinas from "../telas/consultar/telaConsultaMaquinas";
+import TelaConsultaModelos from "../telas/consultar/telaConsultaModelos";
+import TelaConsultaOrdens from "../telas/consultar/telaConsultaOrdens";
+import TelaConsultaPlanos from "../telas/consultar/telaConsultaPlanos";
+import TelaConsultaAlertas from "../telas/consultar/telaConsultaAlertas";
+import TelaCadastrarCelula from "../telas/cadastrar/telaCadastrarCelula"
+import TelaConsultaCelulas from "../telas/consultar/telaConsultaCelulas";
+import TelaAlterarUnidadeFabril from "../telas/alterar/telaAlterarUnidadeFabril";
+import TelaAlterarSetor from "../telas/alterar/telaAlterarSetor";
+import TelaCadastrarComponente from "../telas/cadastrar/telaCadastrarComponente";
+import TelaCadastrarEquipamento from "../telas/cadastrar/telaCadastrarEquipamento";
+import TelaCadastrarFabricante from "../telas/cadastrar/telaCadastrarFabricante";
+import TelaCadastrarManual from "../telas/cadastrar/telaCadastrarManual";
+import TelaCadastrarMaquina from "../telas/cadastrar/telaCadastrarMaquina";
+import TelaCadastrarModelo from "../telas/cadastrar/telaCadastarModelo";
+import TelaCadastrarPlano from "../telas/cadastrar/telaCadastrarPlano";
+import TelaCadastrarOrdem from "../telas/cadastrar/telaCadastrarOrdem";
+import TelaCadastrarAlerta from "../telas/cadastrar/telaCadastrarAlerta";
+import TelaCadastrarSolicitacao from "../telas/cadastrar/telaCadastrarSolicitacao";
 
 function TarefasApp() {
     return (
@@ -38,14 +48,24 @@ function TarefasApp() {
                     <Route path='/cadastros/celula/' element={<TelaConsultaCelulas />} />
                     <Route path='/cadastros/celula/cadastrar' element={<TelaCadastrarCelula />} />
                     <Route path='/cadastros/componente' element={<TelaConsultaComponentes />} />
+                    <Route path='/cadastros/componente/cadastrar' element={<TelaCadastrarComponente />} />
                     <Route path='/cadastros/equipamento' element={<TelaConsultaEquipamentos />} />
+                    <Route path='/cadastros/equipamento/cadastrar' element={<TelaCadastrarEquipamento />} />
                     <Route path='/cadastros/fabricante' element={<TelaConsultaFabricantes />} />
+                    <Route path='/cadastros/fabricante/cadastrar' element={<TelaCadastrarFabricante />} />
                     <Route path='/cadastros/manual' element={<TelaConsultaManuais />} />
+                    <Route path='/cadastros/manual/cadastrar' element={<TelaCadastrarManual />} />
                     <Route path='/cadastros/maquina' element={<TelaConsultaMaquinas />} />
+                    <Route path='/cadastros/maquina/cadastrar' element={<TelaCadastrarMaquina />} />
                     <Route path='/cadastros/modelo' element={<TelaConsultaModelos />} />
+                    <Route path='/cadastros/modelo/cadastrar' element={<TelaCadastrarModelo />} />
                     <Route path='/cadastros/ordem' element={<TelaConsultaOrdens />} />
+                    <Route path='/cadastros/ordem/cadastrar' element={<TelaCadastrarOrdem />} />
                     <Route path='/cadastros/plano' element={<TelaConsultaPlanos />} />
+                    <Route path='/cadastros/plano/cadastrar' element={<TelaCadastrarPlano />} />
                     <Route path='/cadastros/alerta' element={<TelaConsultaAlertas />} />
+                    <Route path='/cadastros/alerta/cadastrar' element={<TelaCadastrarAlerta />} />
+                    <Route path='/cadastros/solicitacao/cadastrar' element={<TelaCadastrarSolicitacao />} />
 
                 </Routes>
             </BrowserRouter>
