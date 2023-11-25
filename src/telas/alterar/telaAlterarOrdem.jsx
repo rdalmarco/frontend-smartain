@@ -6,7 +6,7 @@ import FormsCadastro from "../../componentes/formsCadastro";
 import FormsAlterar from "../../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
 
-function TelaAlterarUnidadeFabril() {
+function TelaAlterarOrdem() {
     const backendUrl = 'http://localhost:8090'
     //Const para armazenar as opções da lista
     const [citys, setCitys] = useState([]);
@@ -128,14 +128,14 @@ function TelaAlterarUnidadeFabril() {
     ];
 
     return (
-        <div className="tittleAlterarUnidadeFabril">
+        <div className="tittleAlterarOrdem">
             <Highbar/>
-            <LayoutCadastro titulo="Unidade Fabril" valorUrlAdicionar="unidadefabril">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/manufacturingUnit`} />
+            <LayoutCadastro titulo="Ordem de Manutenção" valorUrlAdicionar="ordem">
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
     );
 }
 
-export default TelaAlterarUnidadeFabril;
+export default TelaAlterarOrdem;

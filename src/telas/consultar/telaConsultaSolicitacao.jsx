@@ -14,8 +14,8 @@ function TelaConsultaSolicitacao() {
     }, []);
 
     useEffect(() => {
-        console.log('Dados atualizados:', dadosUnidades);
-    }, [dadosUnidades]);
+        console.log('Dados atualizados:', dadosSolicitacao);
+    }, [dadosSolicitacao]);
 
     function fetchDataFromBackend() {
         fetch(`${backendUrl}/api/mhu/`)
@@ -41,7 +41,7 @@ function TelaConsultaSolicitacao() {
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Solicitacao de Serviço" valorUrlAdicionar="solicitacao" dados={dadosUnidades}/>
+            <LayoutConsulta titulo="Solicitacao de Serviço" valorUrlAdicionar="solicitacao" dados={dadosSolicitacao}/>
             <Bottombar/>
         </div>
     );
