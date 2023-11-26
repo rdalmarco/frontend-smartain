@@ -6,6 +6,7 @@ import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaCelulas() {
     const backendUrl = 'http://localhost:8090'
+
     const [dadosCelulas, setDadosCelulas] = useState([]);
 
     useEffect(() => {
@@ -17,15 +18,15 @@ function TelaConsultaCelulas() {
     }, [dadosCelulas]);
 
     function fetchDataFromBackend() {
-        fetch(`${backendUrl}/api/mhu/productioncell`)
+        fetch(`${backendUrl}/api/mhu/productionCell`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
-                    Name: item.model,
-                    Fabricante: item.manufacturer.socialReason,
+                    Name: item.name,
+                    Description: item.description,
                     Status: item.status,
                 }));
 
@@ -37,7 +38,7 @@ function TelaConsultaCelulas() {
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Celulas" valorUrlAdicionar="celula" dados={dadosCelulas}/>
+            <LayoutConsulta titulo="Células" valorUrlAdicionar="celula" dados={dadosCelulas}/>
             <Bottombar/>
         </div>
     );

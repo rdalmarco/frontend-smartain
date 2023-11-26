@@ -9,19 +9,19 @@ import {useParams} from "react-router-dom";
 function TelaAlterarCelula() {
     const backendUrl = 'http://localhost:8090'
     //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [dadosCelula, setDadosCelula] = useState([]);
+    const [sectors, setSectors] = useState([]);
+
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchSectors();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+
+        fetch(`${backendUrl}/api/mhu/productionCell/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -29,91 +29,62 @@ function TelaAlterarCelula() {
                 // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Nome: data.name,
+                    Description: data.description,
                     Status: data.status,
-                    Address: data.address,
+                    Tag: data.tag,
+                    Sector: data.sector.id
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
                 // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosCelula([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchSectors() {
+        fetch(`${backendUrl}/api/mhu/sector`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosSector = data.map(item => ({
                     Id: item.id,
-                    Nome: item.name
+                    Nome: item.name,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                // Atualiza o estado usando setDadosSetor
+                setSectors(dadosSector);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
+            tipo: 'input',
+            label: 'name',
             tipoCampo: 'text',
-            value: 1,
-            tipoValue: 'int',
+            value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Nome : '',
+        },
+        {
+            tipo: 'input',
+            label: 'description',
+            tipoCampo: 'text',
+            value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Description : '',
         },
         {
             tipo: 'input',
             label: 'tag',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Tag : '',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
+            label: 'sectorId',
+            opcoes: sectors.map(sector => ({ value: sector.Id, label: sector.Nome })),
             tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
-        },
-        {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
-            tipoValue: 'int',
+            value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Sector : '',
         },
         {
             tipo: 'select',
@@ -122,7 +93,7 @@ function TelaAlterarCelula() {
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosCelula && dadosCelula.length > 0 && dadosCelula[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +102,7 @@ function TelaAlterarCelula() {
         <div className="tittleAlterarCelula">
             <Highbar/>
             <LayoutCadastro titulo="Celula" valorUrlAdicionar="celula">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/productionCell`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

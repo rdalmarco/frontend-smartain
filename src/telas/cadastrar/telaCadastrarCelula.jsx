@@ -22,7 +22,7 @@ function TelaCadastrarCelula() {
 
                 // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosSector = data.map(item => ({
-                    Id: item.id.cityId,
+                    Id: item.id,
                     Nome: item.name
                 }));
 
@@ -65,8 +65,8 @@ function TelaCadastrarCelula() {
     return (
         <div className="tittleCadastrarCelula">
             <Highbar/>
-            <LayoutCadastro titulo="Celula" valorUrlAdicionar="celula">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/manufacturingUnit`} />
+            <LayoutCadastro titulo="Célula" valorUrlAdicionar="celula">
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/productionCell`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
