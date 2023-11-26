@@ -13,33 +13,29 @@ function TelaCadastrarFabricante() {
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
+            tipo: 'input',
+            label: 'socialReason',
             tipoCampo: 'text',
-            defaultValue: 1,
-            tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'cnpj',
             tipoCampo: 'text',
-        },
-        {
-            tipo: 'select',
-            label: 'cityId',
-            opcoes: '',
-            tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'address',
+            label: 'phone',
             tipoCampo: 'text',
         },
         {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: '',
-            tipoValue: 'int',
+            tipo: 'input',
+            label: 'phone',
+            tipoCampo: 'text',
+        },
+        {
+            tipo: 'input',
+            label: 'email',
+            tipoCampo: 'text',
         },
         {
             tipo: 'hidden',

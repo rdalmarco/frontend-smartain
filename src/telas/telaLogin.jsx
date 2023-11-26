@@ -8,6 +8,10 @@ function TelaLogin() {
     const [loggedInUserId, setLoggedInUserId] = useState(null);
     const [error, setError] = useState(null);
 
+    function onMenu() {
+
+    }
+
     const handleLogin = async () => {
         try {
             const response = await fetch('http://localhost:8090/users/login', {
@@ -60,11 +64,10 @@ function TelaLogin() {
                     <button className="logar" onClick={handleLogin}>
                         Logar
                     </button>
-                    {/* Após login bem-sucedido, redirecione para a página do menu */}
                     {loggedInUserId && <Link to="/menu">Menu</Link>}
-                    {/* Exibir mensagem de erro se houver um erro de login */}
                     {error && <p className="error-message">{error}</p>}
                 </div>
+                <Link to="/menu">Menu</Link>
             </div>
         </div>
     );
