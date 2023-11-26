@@ -65,7 +65,7 @@ function TelaCadastrarModelo() {
         },
         {
             tipo: 'select',
-            label: 'ModelTypeId',
+            label: 'machineModelTypeId',
             opcoes: modelTypes.map(modelType => ({ value: modelType.Id, label: modelType.Nome })),
             tipoValue: 'int',
         },
@@ -81,7 +81,7 @@ function TelaCadastrarModelo() {
         <div className="tittleCadastarModelo">
             <Highbar/>
             <LayoutCadastro titulo="Modelo" valorUrlAdicionar="modelo">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/machineModel`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
