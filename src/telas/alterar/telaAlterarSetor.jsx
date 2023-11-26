@@ -23,14 +23,13 @@ function TelaAlterarSetor() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Nome: data.name,
+                    Tag: data.tag,
+                    Description: data.description,
                     Status: data.status,
-                    Address: data.address,
+                    CreatedDate: data.createdDate,
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
@@ -71,16 +70,19 @@ function TelaAlterarSetor() {
             tipo: 'input',
             label: 'name',
             tipoCampo: 'text',
+            value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'tag',
             tipoCampo: 'text',
+            value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Tag : '',
         },
         {
             tipo: 'input',
             label: 'description',
             tipoCampo: 'text',
+            value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Description : '',
         },
         {
             tipo: 'select',
@@ -91,12 +93,6 @@ function TelaAlterarSetor() {
             ],
             value: dadosSetor && dadosSetor.length > 0 && dadosSetor[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
-        },
-        {
-            tipo: 'hidden',
-            label: 'createdDate',
-            tipoCampo: 'text',
-            defaultValue: '17/11/2023',
         },
     ];
 

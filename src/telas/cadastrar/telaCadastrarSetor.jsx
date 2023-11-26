@@ -35,7 +35,7 @@ function TelaCadastrarSetor() {
     const camposFormulario = [
         {
             tipo: 'select',
-            label: 'unit',
+            label: 'unitId',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
             tipoValue: 'int',
         },
@@ -59,12 +59,6 @@ function TelaCadastrarSetor() {
             label: 'status',
             tipoCampo: 'text',
             defaultValue: 'ACTIVE',
-        },
-        {
-            tipo: 'hidden',
-            label: 'createdDate',
-            tipoCampo: 'text',
-            defaultValue: '17/11/2023',
         },
     ];
 

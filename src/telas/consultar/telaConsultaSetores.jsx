@@ -1,17 +1,41 @@
 import {Link} from "react-router-dom";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaSetores() {
-    //Aqui será recebido os dados do backend
-    const dadosSetores = [
-        [
-            { Id: '1', Nome: 'Setor 1', Unidade: 'Fabrica 1',  Status:'Ativo'},
-            { Id: '2', Nome: 'Setor 2', Unidade: 'Fabrica 2',  Status:'Ativo'}
-        ],
-    ];
+    const backendUrl = 'http://localhost:8090'
+
+    const [dadosSetores, setDadosSetores] = useState([]);
+
+    useEffect(() => {
+        fetchDataFromBackend();
+    }, []);
+
+    useEffect(() => {
+        console.log('Dados atualizados:', dadosSetores);
+    }, [dadosSetores]);
+
+    function fetchDataFromBackend() {
+        fetch(`${backendUrl}/api/mhu/sector`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                // Mapeia os dados recebidos do backend para o formato desejado
+                const dadosFormatados = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.name,
+                    Tipo: item.description,
+                    Status: item.status,
+                }));
+
+                // Atualiza o estado usando setDadosUnidades
+                setDadosSetores([dadosFormatados]);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
     return (
         <div className="">
