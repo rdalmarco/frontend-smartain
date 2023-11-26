@@ -70,7 +70,7 @@ function TarefasApp() {
 
                     <Route path='/cadastros/usuario' element={<TelaConsultaUsuario />}></Route>
                     <Route path='/cadastros/usuario/cadastrar' element={<TelaCadastrarUsuario />}></Route>
-                    <Route path='/cadastros/usuario/alterar/:Id' element={<TelaAlterarUsuario />}></Route>
+                    <Route path='/cadastros/usuario/alterar/:id' element={<TelaAlterarUsuario />}></Route>
 
                     <Route path='/cadastrar' element={<TelaCadastrar />}></Route>
                     <Route path='/menu' element={<TelaMenu />}></Route>

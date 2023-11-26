@@ -30,7 +30,7 @@ function TelaCadastrarUsuario() {
         },
         {
             tipo: 'hidden',
-            label: 'userGroupId',
+            label: 'groupId',
             tipoCampo: 'text',
             defaultValue: '1',
             tipoValue: 'int',

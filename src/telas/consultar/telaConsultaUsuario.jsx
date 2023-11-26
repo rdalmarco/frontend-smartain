@@ -5,7 +5,6 @@ import React, {useEffect, useState} from "react";
 import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaUsuario() {
-
     const backendUrl = 'http://localhost:8090'
 
     const [dadosUsers, setDadosUsers] = useState([]);
@@ -26,7 +25,7 @@ function TelaConsultaUsuario() {
 
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
-                    Grupo: item.userGroup.name,
+                    Name: item.name,
                     Email: item.email,
                 }));
 

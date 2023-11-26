@@ -8,32 +8,32 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarUsuario() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [dadosUsuario, setDadosUsuario] = useState([]);
+    const [dadosUser, setDadosUser] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
-        fetchValues();
+        fetchValuesUsuario();
     }, []);
 
-    function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+    function fetchValuesUsuario() {
+        console.log('ID"', {id})
+
+        fetch(`${backendUrl}/users/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
+                    Nome: data.name,
                     Login: data.login,
                     Email: data.email,
+                    Status: data.status,
                     //Senha: ususenha,?
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUsuario([dadosFormatadosAlterar]);
+                setDadosUser([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
@@ -43,19 +43,33 @@ function TelaAlterarUsuario() {
             tipo: 'input',
             label: 'name',
             tipoCampo: 'text',
-            value: dadosUsuario && dadosUsuario.length > 0 ? dadosUsuario[0].name : '',
+            value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'login',
             tipoCampo: 'text',
-            value: dadosUsuario && dadosUsuario.length > 0 ? dadosUsuario[0].login : '',
+            value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Login : '',
+        },
+        {
+            tipo: 'input',
+            label: 'password',
+            tipoCampo: 'text',
+            value: '',
+            //value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Password : '',
+        },
+        {
+            tipo: 'hidden',
+            label: 'groupId',
+            tipoCampo: 'text',
+            value: '1',
+            tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'email',
             tipoCampo: 'text',
-            value: dadosUsuario && dadosUsuario.length > 0 ? dadosUsuario[0].email : '',
+            value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Email : '',
         },
         {
             tipo: 'select',
@@ -64,7 +78,7 @@ function TelaAlterarUsuario() {
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }
             ],
-            value: dadosUsuario && dadosUsuario.length > 0 && dadosUsuario[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosUser && dadosUser.length > 0 && dadosUser[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
         },
     ];
@@ -73,7 +87,7 @@ function TelaAlterarUsuario() {
         <div className="tittleAlterarUsuario">
             <Highbar/>
             <LayoutCadastro titulo="Usuário" valorUrlAdicionar="usuario">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/users`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
