@@ -2,26 +2,20 @@ import React, { useState, useEffect } from "react";
 import LayoutCadastro from "../../componentes/layoutCadastro";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import FormsCadastro from "../../componentes/formsCadastro";
 import FormsAlterar from "../../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
 
 function TelaAlterarFabricante() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [dadosFabricante, setDadosFabricante] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mhu/supplier/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -29,91 +23,43 @@ function TelaAlterarFabricante() {
                 // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Nome: data.socialReason,
+                    CNPJ: data.cnpj,
+                    Phone: data.phone,
+                    Email: data.email,
                     Status: data.status,
-                    Address: data.address,
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
-                    Id: item.id,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                setDadosFabricante([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
+            tipo: 'input',
+            label: 'socialReason',
             tipoCampo: 'text',
-            value: 1,
-            tipoValue: 'int',
+            value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Nome : '',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'cnpj',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
-        },
-        {
-            tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
-            tipoValue: 'int',
+            value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].CNPJ : '',
         },
         {
             tipo: 'input',
-            label: 'address',
+            label: 'phone',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
+            value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Phone : '',
         },
         {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
-            tipoValue: 'int',
+            tipo: 'input',
+            label: 'email',
+            tipoCampo: 'text',
+            value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Email : '',
         },
         {
             tipo: 'select',
@@ -122,7 +68,7 @@ function TelaAlterarFabricante() {
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosFabricante && dadosFabricante.length > 0 && dadosFabricante[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +77,7 @@ function TelaAlterarFabricante() {
         <div className="tittleAlterarFabricante">
             <Highbar/>
             <LayoutCadastro titulo="Fabricante" valorUrlAdicionar="fabricante">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/supplier`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

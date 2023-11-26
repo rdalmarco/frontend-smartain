@@ -29,11 +29,6 @@ function TelaCadastrarFabricante() {
         },
         {
             tipo: 'input',
-            label: 'phone',
-            tipoCampo: 'text',
-        },
-        {
-            tipo: 'input',
             label: 'email',
             tipoCampo: 'text',
         },
@@ -49,7 +44,7 @@ function TelaCadastrarFabricante() {
         <div className="tittleCadastrarFabricante">
             <Highbar/>
             <LayoutCadastro titulo="Fabricante" valorUrlAdicionar="fabricante">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/supplier`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
