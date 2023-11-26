@@ -37,6 +37,7 @@ function Highbar() {
                             <li> <Link to="/cadastros/ordem">Ordem</Link></li>
                             <li> <Link to="/cadastros/plano">Plano</Link></li>
                             <li> <Link to="/cadastros/alerta">Alerta</Link></li>
+                            <li> <Link to="/cadastros/usuario">Usuário</Link></li>
                         </ul>
                     )}
                 </li>

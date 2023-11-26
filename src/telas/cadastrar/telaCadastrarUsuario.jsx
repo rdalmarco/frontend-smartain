@@ -6,67 +6,59 @@ import FormsCadastro from "../../componentes/formsCadastro";
 
 function TelaCadastrarUsuario() {
     const backendUrl = 'http://localhost:8090'
-    const [modelTypes, setModelTypes] = useState([]);
+    const [manufacturingUnit, setManufacturingUnit] = useState([]);
 
     useEffect(() => {
-        fetchModelType();
+        fetchManufacturingUnit();
     }, []);
 
-    function fetchModelType() {
-        fetch(`${backendUrl}/api/mhu/sector`)
+    function fetchManufacturingUnit() {
+        fetch(`${backendUrl}/api/glo/manufacturingUnit`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
                 // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosModelTypes = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
+                const dadosManufacturingUnitTypes = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
                 }));
-
+                console.log(dadosManufacturingUnitTypes)
                 // Atualiza o estado usando setDadosUnidades
-                setModelTypes(dadosModelTypes);
+                setManufacturingUnit(dadosManufacturingUnitTypes);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
+
     const camposFormulario = [
         {
             tipo: 'input',
-            label: 'usunome',
+            label: 'Nome Completo',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
-            label: 'ususenha',
+            label: 'Email',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
-            label: 'usuemail',
-            tipoCampo: 'text',
-        },
-        {
-            tipo: 'input',
-            label: '',
-            tipoCampo: 'text',
-        },
-        {
-            tipo: 'input',
-            label: 'dimensions',
+            label: 'Senha',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: modelTypes.map(modelType => ({ value: modelType.Id, label: modelType.Nome })),
+            label: 'Unidade Fabril',
+            opcoes: manufacturingUnit.map(manufacturingUnit => ({value: manufacturingUnit.Id, label: manufacturingUnit.Nome})),
             tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: '',
-            tipoCampo: 'text',
-        },
+        }
+        /*{//Falta fazer userGroup
+            tipo: 'select',
+            label: 'userGroup',
+            opcoes: userGroupTypes.map(userGroup => ({ value: userGroup.Id, label: userGroup.name})),
+            tipoValue: 'int',
+        },*/
     ];
 
     return (
