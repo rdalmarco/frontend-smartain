@@ -34,22 +34,22 @@ function TelaCadastrarUsuario() {
     const camposFormulario = [
         {
             tipo: 'input',
-            label: 'usunome',
+            label: 'Nome Completo',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
-            label: 'usuemail',
+            label: 'Email',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
-            label: 'ususenha',
+            label: 'Senha',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
-            label: 'manufacturingUnit',
+            label: 'Unidade Fabril',
             opcoes: manufacturingUnit.map(manufacturingUnit => ({value: manufacturingUnit.Id, label: manufacturingUnit.Nome})),
             tipoValue: 'int',
         }
