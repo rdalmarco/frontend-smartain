@@ -6,7 +6,6 @@ import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaModelos() {
     const backendUrl = 'http://localhost:8090'
-
     const [dadosModelos, setDadosModelos] = useState([]);
 
     useEffect(() => {
