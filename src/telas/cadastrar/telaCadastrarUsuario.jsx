@@ -26,14 +26,21 @@ function TelaCadastrarUsuario() {
         {
             tipo: 'input',
             label: 'password',
+            tipoCampo: 'password',
+        },
+        {
+            tipo: 'hidden',
+            label: 'userGroupId',
             tipoCampo: 'text',
-        }
-        /*{
-            tipo: 'select',
-            label: 'userGroup',
-            opcoes: userGroupTypes.map(userGroup => ({ value: userGroup.Id, label: userGroup.name})),
+            defaultValue: '1',
             tipoValue: 'int',
-        },*/
+        },
+        {
+            tipo: 'hidden',
+            label: 'status',
+            tipoCampo: 'text',
+            defaultValue: 'ACTIVE',
+        },
     ];
 
     return (

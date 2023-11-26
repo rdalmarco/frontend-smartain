@@ -44,7 +44,7 @@ function TelaCadastrarFabricante() {
         <div className="tittleCadastrarFabricante">
             <Highbar/>
             <LayoutCadastro titulo="Fabricante" valorUrlAdicionar="fabricante">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/supplier`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/manufacturer`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

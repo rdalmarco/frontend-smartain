@@ -7,10 +7,28 @@ import FormsCadastro from "../../componentes/formsCadastro";
 function TelaCadastrarModelo() {
     const backendUrl = 'http://localhost:8090'
     const [modelTypes, setModelTypes] = useState([]);
+    const [manufactures, setManufactures] = useState([]);
 
     useEffect(() => {
         fetchModelType();
+        fetchManufacturer();
     }, []);
+
+    function fetchManufacturer() {
+        fetch(`${backendUrl}/api/mhu/manufacturer`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosManufactures = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.socialReason
+                }));
+
+                setManufactures(dadosManufactures);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
     function fetchModelType() {
         fetch(`${backendUrl}/api/mhu/machineModelType`)
@@ -18,19 +36,23 @@ function TelaCadastrarModelo() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosModelTypes = data.map(item => ({
                     Id: item.id,
                     Nome: item.description
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setModelTypes(dadosModelTypes);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
+        {
+            tipo: 'select',
+            label: 'manufacturerId',
+            opcoes: manufactures.map(manufacturer => ({ value: manufacturer.Id, label: manufacturer.Nome })),
+            tipoValue: 'int',
+        },
         {
             tipo: 'input',
             label: 'model',
@@ -46,6 +68,12 @@ function TelaCadastrarModelo() {
             label: 'ModelTypeId',
             opcoes: modelTypes.map(modelType => ({ value: modelType.Id, label: modelType.Nome })),
             tipoValue: 'int',
+        },
+        {
+            tipo: 'hidden',
+            label: 'status',
+            tipoCampo: 'text',
+            defaultValue: 'ACTIVE',
         },
     ];
 

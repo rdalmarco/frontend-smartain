@@ -14,7 +14,7 @@ function TelaConsultaFabricantes() {
     }, []);
 
     function fetchDataFromBackend() {
-        fetch(`${backendUrl}/api/mhu/supplier`)
+        fetch(`${backendUrl}/api/mhu/manufacturer`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);

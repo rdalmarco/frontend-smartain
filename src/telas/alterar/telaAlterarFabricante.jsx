@@ -15,7 +15,7 @@ function TelaAlterarFabricante() {
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/mhu/supplier/${id}`)
+        fetch(`${backendUrl}/api/mhu/manufacturer/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -77,7 +77,7 @@ function TelaAlterarFabricante() {
         <div className="tittleAlterarFabricante">
             <Highbar/>
             <LayoutCadastro titulo="Fabricante" valorUrlAdicionar="fabricante">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/supplier`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/manufacturer`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
