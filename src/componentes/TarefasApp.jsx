@@ -4,7 +4,7 @@ import TelaCadastrar from "../telas/cadastrar/telaCadastrar";
 import TelaMenu from "../telas/telaMenu";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import TelaConsultaUsuario from "../telas/consultar/telaConsutaUsuario";
+import TelaConsultaUsuario from "../telas/consultar/telaConsultaUsuario";
 import TelaCadastrarUsuario from "../telas/cadastrar/telaCadastrarUsuario";
 import TelaAlterarUsuario from "../telas/alterar/telaAlterarUsuario";
 
