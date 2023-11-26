@@ -8,130 +8,130 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarMaquina() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [cells, setCells] = useState([]);
+    const [models, setModels] = useState([]);
+    const [dadosMachine, setDadosMachine] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchCell();
+        fetchModel();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mhu/machine/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
-                    Status: data.status,
-                    Address: data.address,
+                    Tag: data.tag,
+                    Cell: data.productionCell.id,
+                    TechnicalData: data.technicalData,
+                    MachineModel: data.machineModel.id,
+                    AcquisitionDate: data.acquisitionDate,
+                    WarrantyExpDate: data.warrantyExpDate,
+                    Status: data.status
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosMachine([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchCell() {
+        fetch(`${backendUrl}/api/mhu/productionCell`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosCell = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                setCells(dadosCell);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchModel() {
+        fetch(`${backendUrl}/api/mhu/machineModel`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosModels = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.model
+                }));
+
+                setModels(dadosModels);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
-            tipoCampo: 'text',
-            value: 1,
+            tipo: 'select',
+            label: 'productionCellId',
+            opcoes: cells.map(cell => ({ value: cell.Id, label: cell.Nome })),
             tipoValue: 'int',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].Cell : '',
+        },
+        {
+            tipo: 'input',
+            label: 'technicalData',
+            tipoCampo: 'text',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].TechnicalData : '',
         },
         {
             tipo: 'input',
             label: 'tag',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].Tag : '',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
+            label: 'machineModelId',
+            opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].MachineModel : '',
         },
         {
             tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
+            label: 'acquisitionDate',
+            tipoCampo: 'date',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].AcquisitionDate : '',
         },
         {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
-            tipoValue: 'int',
+            tipo: 'input',
+            label: 'warrantyExpDate',
+            tipoCampo: 'date',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].WarrantyExpDate : '',
         },
         {
             tipo: 'select',
             label: 'status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Ativo' },
+                { value: 2, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosMachine && dadosMachine.length > 0 && dadosMachine[0].Status === 'ACTIVE' ? 1 : 2,
             tipoValue: 'int',
         },
     ];
+
+
 
     return (
         <div className="tittleAlterarMaquina">
             <Highbar/>
             <LayoutCadastro titulo="Maquina" valorUrlAdicionar="maquina">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/machine`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

@@ -6,7 +6,6 @@ import FormsCadastro from "../../componentes/formsCadastro";
 
 function TelaCadastrarUnidadeFabril() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
     const [citys, setCitys] = useState([]);
     const [types, setTypes] = useState([]);
 
@@ -22,13 +21,11 @@ function TelaCadastrarUnidadeFabril() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosCity = data.map(item => ({
                     Id: item.id.cityId,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setCitys(dadosCity);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));

@@ -1,7 +1,7 @@
 input.formsCadastro,
 select.formsCadastro {
     width: 100%;
-    height: 30px;
+    height: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,6 +11,11 @@ select.formsCadastro {
     box-sizing: border-box;
     border-radius: 10px;
     color: dimgray;
+    padding: 7px 5px;
+}
+
+input[type="date"] {
+   padding: 0 5px;
 }
 
 button.formsEnviar {
@@ -36,6 +41,8 @@ button.formsExcluir {
     margin: 15px;
     background-color: firebrick;
 }
+
+
 
 
 

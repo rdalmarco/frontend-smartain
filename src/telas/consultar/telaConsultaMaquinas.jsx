@@ -24,12 +24,11 @@ function TelaConsultaMaquinas() {
 
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
-                    Name: item.model,
-                    Fabricante: item.manufacturer.socialReason,
+                    Tag: item.tag,
+                    Modelo: item.machineModel.model,
                     Status: item.status,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setDadosMaquinas([dadosFormatados]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
