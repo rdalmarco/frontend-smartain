@@ -42,6 +42,7 @@ import TelaAlterarOrdem from "../telas/alterar/telaAlterarOrdem";
 import TelaAlterarPlano from "../telas/alterar/telaAlterarPlano";
 import TelaAlterarAlerta from "../telas/alterar/telaAlterarAlerta";
 import TelaAlterarSolicitacao from "../telas/alterar/telaAlterarSolicitacao";
+import TelaCadastrarUsuario from "../telas/cadastrar/telaCadastrarUsuario";
 
 function TarefasApp() {
     return (
@@ -49,6 +50,7 @@ function TarefasApp() {
                 <Routes>
                     <Route path='/' element={<App />}></Route>
                     <Route path='/login' element={<TelaLogin />}></Route>
+                    <Route path='/cadastros/usuario' element={<TelaCadastrarUsuario />}></Route>
                     <Route path='/cadastrar' element={<TelaCadastrar />}></Route>
                     <Route path='/menu' element={<TelaMenu />}></Route>
                     <Route path='/cadastros/setor' element={<TelaConsultaSetores />}></Route>
