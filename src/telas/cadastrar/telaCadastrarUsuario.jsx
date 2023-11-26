@@ -40,7 +40,7 @@ function TelaCadastrarUsuario() {
         <div className="tittleCadastarUsuario">
             <Highbar/>
             <LayoutCadastro titulo="Usuário" valorUrlAdicionar="usuario">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/users`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

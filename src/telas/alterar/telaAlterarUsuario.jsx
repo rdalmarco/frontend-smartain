@@ -73,7 +73,7 @@ function TelaAlterarUsuario() {
         <div className="tittleAlterarUsuario">
             <Highbar/>
             <LayoutCadastro titulo="Usuário" valorUrlAdicionar="usuario">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
