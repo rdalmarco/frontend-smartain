@@ -23,7 +23,6 @@ function TelaConsultaSetores() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
                     Nome: item.name,

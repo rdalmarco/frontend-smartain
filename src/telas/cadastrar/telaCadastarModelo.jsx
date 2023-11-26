@@ -13,15 +13,15 @@ function TelaCadastrarModelo() {
     }, []);
 
     function fetchModelType() {
-        fetch(`${backendUrl}/api/mhu/sector`)
+        fetch(`${backendUrl}/api/mhu/machineModelType`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
                 // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosModelTypes = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
+                    Id: item.id,
+                    Nome: item.description
                 }));
 
                 // Atualiza o estado usando setDadosUnidades

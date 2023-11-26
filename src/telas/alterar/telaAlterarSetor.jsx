@@ -26,6 +26,7 @@ function TelaAlterarSetor() {
                 const dadosFormatadosAlterar = {
                     Id: data.id,
                     Nome: data.name,
+                    Unit: data.unit.id,
                     Tag: data.tag,
                     Description: data.description,
                     Status: data.status,
@@ -45,8 +46,6 @@ function TelaAlterarSetor() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosUnit = data.map(item => ({
                     Id: item.id,
                     Nome: item.tag
@@ -61,9 +60,9 @@ function TelaAlterarSetor() {
     const camposFormulario = [
         {
             tipo: 'select',
-            label: 'unit',
+            label: 'unitId',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
-            value: dadosSetor && dadosSetor.length > 0 && dadosSetor[0].Status,
+            value : dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Unit : '',
             tipoValue: 'int',
         },
         {
@@ -100,7 +99,7 @@ function TelaAlterarSetor() {
         <div className="tittleCadastrarUnidadeFabril">
             <Highbar/>
             <LayoutCadastro titulo="Setor" valorUrlAdicionar="setor">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/manufacturingUnit`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/sector`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
