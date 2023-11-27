@@ -8,74 +8,102 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarSolicitacao() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
+    const [machines, setMachines] = useState([]);
+    const [symptoms, setSymptoms] = useState([]);
+    const [prioritys, setPrioritys] = useState([]);
     const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [dadosSolicitacao, setDadosSolicitacao] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchMachine();
+        fetchSymptom();
+        fetchPriority();
+        fetchTypes();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mpp/serviceSolicitation/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Machine: data.machine.id,
                     Status: data.status,
-                    Address: data.address,
+                    Description: data.description,
+                    Priority: data.priority.id,
+                    Symptom: data.symptom.id,
+                    MaintenanceType: data.maintenanceType.id
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosSolicitacao([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
+                const dadosMachine = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
+                setMachines(dadosMachine);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
+    function fetchSymptom() {
+        fetch(`${backendUrl}/api/mpp/serviceSymptom`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosSymptom = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
+                setSymptoms(dadosSymptom);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchPriority() {
+        fetch(`${backendUrl}/api/mpp/servicePriority`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosPriority = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.descritpion
+                }));
+
+                setPrioritys(dadosPriority);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchTypes() {
+        fetch(`${backendUrl}/api/mpp/maintenanceType`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosType = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.descritpion
+                }));
+
                 setTypes(dadosType);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -83,46 +111,62 @@ function TelaAlterarSolicitacao() {
 
     const camposFormulario = [
         {
+            tipo: 'select',
+            label: 'machineId',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
+            tipoValue: 'int',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Machine : '',
+        },
+        {
             tipo: 'hidden',
-            label: 'customerId',
+            label: 'status',
             tipoCampo: 'text',
-            value: 1,
             tipoValue: 'int',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Status : '',
         },
         {
-            tipo: 'input',
-            label: 'tag',
+            tipo: 'textarea',
+            label: 'description',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Description : '',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
+            label: 'priorityId',
+            opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
             tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Priority : '',
         },
         {
             tipo: 'select',
-            label: 'typeId',
+            label: 'symptomId',
+            opcoes: symptoms.map(symptom => ({ value: symptom.Id, label: symptom.Nome })),
+            tipoValue: 'int',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Symptom : '',
+        },
+        {
+            tipo: 'select',
+            label: 'maintenanceTypeId',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
             tipoValue: 'int',
+            value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].MaintenanceType : '',
         },
         {
             tipo: 'select',
             label: 'status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Aberta' },
+                { value: 2, label: 'Aprovada' },
+                { value: 3, label: 'Negada' },
+                { value: 4, label: 'Cancelada' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosSolicitacao && dadosSolicitacao.length > 0
+                ? (dadosSolicitacao[0].Status === 'OPENED' ? 1
+                    : dadosSolicitacao[0].Status === 'APPROVED' ? 2
+                        : dadosSolicitacao[0].Status === 'DENIED' ? 3
+                            : dadosSolicitacao[0].Status === 'CANCELED' ? 4
+                                : null)
+                : null,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +175,7 @@ function TelaAlterarSolicitacao() {
         <div className="tittleAlterarSolicitacao">
             <Highbar/>
             <LayoutCadastro titulo="Solicitacao de Serviço" valorUrlAdicionar="solicitacao">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceSolicitation`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

@@ -43,6 +43,23 @@ const CampoInput = ({ label, type, defaultValue, onChange }) => {
     );
 };
 
+const CampoTextarea = ({ label, defaultValue, onChange }) => {
+    const handleChange = (e) => {
+        onChange(e.target.value);
+    };
+
+    return (
+        <div>
+            <textarea
+                onChange={handleChange}
+                placeholder={label}
+                defaultValue={defaultValue}
+                className="formsCadastro"
+            />
+        </div>
+    );
+};
+
 function FormsAlterar({campos, backEndUrl })  {
     const [valoresCampos, setValoresCampos] = useState({});
     const { id } = useParams();
@@ -150,6 +167,21 @@ function FormsAlterar({campos, backEndUrl })  {
                 }
                 return null;
             })}
+            <div className="textareaColumn">
+                {campos
+                    .filter((campo) => campo.tipo === 'textarea')
+                    .map((campo, index) => (
+                        <CampoTextarea
+                            key={index}
+                            label={campo.label}
+                            defaultValue={campo.value}
+                            onChange={(valor) =>
+                                handleChangeCampo(campo.label, valor, campo.tipoValue)
+                            }
+                            className="formsCadastro"
+                        />
+                    ))}
+            </div>
             <button type="submit" className="formsEnviar">Enviar</button>
             <button type="button" className="formsExcluir" onClick={handleDelete}>Excluir</button>
         </form>

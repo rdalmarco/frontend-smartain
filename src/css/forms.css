@@ -1,22 +1,40 @@
 input.formsCadastro,
 select.formsCadastro {
     width: 100%;
+    max-width: 300px; /* Defina a largura máxima desejada */
     min-width: 200px;
     height: auto;
     display: block;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     background-color: black;
     margin: 10px;
     box-sizing: border-box;
     border-radius: 10px;
     color: dimgray;
     padding: 7px 5px;
+    word-wrap: break-word;
+}
+
+textarea.formsCadastro {
+    width: 100%;
+    min-height: 100px;
+    max-height: 300px;
+    max-width: 300px;
+    min-width: 200px;
+    height: auto;
+    display: block;
+    background-color: black;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: dimgray;
+    padding: 7px 5px;;
 }
 
 input[type="date"] {
-   padding: 0 5px;
+    padding: 0 5px;
 }
 
 button.formsEnviar {
@@ -42,8 +60,4 @@ button.formsExcluir {
     margin: 15px;
     background-color: firebrick;
 }
-
-
-
-
 

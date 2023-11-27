@@ -2,6 +2,24 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../css/forms.css'
 
+
+const CampoTextarea = ({ label, defaultValue, onChange }) => {
+    const handleChange = (e) => {
+        onChange(e.target.value);
+    };
+
+    return (
+        <div>
+            <textarea
+                onChange={handleChange}
+                placeholder={label}
+                defaultValue={defaultValue}
+                className="formsCadastro"
+            />
+        </div>
+    );
+};
+
 const CampoSelect = ({ label, options, onChange }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
@@ -51,12 +69,11 @@ function FormsCadastro({campos, backEndUrl})  {
     const handleChangeCampo = (nomeCampo, valorCampo, tipoValue) => {
         let valorConvertido = valorCampo;
 
-        // Verifica o tipo do campo e converte o valor conforme necessário
         if (tipoValue === 'int') {
             valorConvertido = parseInt(valorCampo, 10);
         } else if (tipoValue === 'float') {
             valorConvertido = parseFloat(valorCampo);
-        } // Adicione outras verificações conforme necessário
+        }
 
         setValoresCampos({ ...valoresCampos, [nomeCampo]: valorConvertido });
     };
@@ -84,34 +101,60 @@ function FormsCadastro({campos, backEndUrl})  {
 
     return (
         <form onSubmit={handleSubmit}>
-            {campos.map((campo, index) => {
-                if (campo.tipo === 'select') {
-                    return (
-                        <CampoSelect
-                            key={index}
-                            label={campo.label}
-                            options={campo.opcoes}
-                            onChange={(valor) => handleChangeCampo(campo.label, valor, campo.tipoValue)}
-                        />
-                    );
-                } else if (campo.tipo === 'input') {
-                    return (
-                        <CampoInput
-                            key={index}
-                            label={campo.label}
-                            type={campo.tipoCampo}
-                            defaultValue={campo.defaultValue}
-                            name={campo.label}
-                            onChange={(valor) => handleChangeCampo(campo.label, valor, campo.tipoValue)}
-                        />
-                    );
-
-                }
-                return null;
-            })}
-            <button type="submit" className="formsEnviar">Enviar</button>
+            <div className="input-select-container">
+                <div className="formsColumn1">
+                    {campos.map((campo, index) => {
+                        if (campo.tipo === 'select') {
+                            return (
+                                <CampoSelect
+                                    key={index}
+                                    label={campo.label}
+                                    options={campo.opcoes}
+                                    onChange={(valor) =>
+                                        handleChangeCampo(campo.label, valor, campo.tipoValue)
+                                    }
+                                    className="formsCadastro"
+                                />
+                            );
+                        } else if (campo.tipo === 'input') {
+                            return (
+                                <CampoInput
+                                    key={index}
+                                    label={campo.label}
+                                    type={campo.tipoCampo}
+                                    defaultValue={campo.defaultValue}
+                                    name={campo.label}
+                                    onChange={(valor) =>
+                                        handleChangeCampo(campo.label, valor, campo.tipoValue)
+                                    }
+                                    className="formsCadastro"
+                                />
+                            );
+                        }
+                        return null;
+                    })}
+                </div>
+                <div className="textareaColumn">
+                    {campos
+                        .filter((campo) => campo.tipo === 'textarea')
+                        .map((campo, index) => (
+                            <CampoTextarea
+                                key={index}
+                                label={campo.label}
+                                defaultValue={campo.defaultValue}
+                                onChange={(valor) =>
+                                    handleChangeCampo(campo.label, valor, campo.tipoValue)
+                                }
+                                className="formsCadastro"
+                            />
+                        ))}
+                </div>
+            </div>
+            <button type="submit" className="formsEnviar">
+                Enviar
+            </button>
         </form>
     );
-};
+}
 
 export default FormsCadastro;

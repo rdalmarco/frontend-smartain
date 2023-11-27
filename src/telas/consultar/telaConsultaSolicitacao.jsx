@@ -6,7 +6,6 @@ import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaSolicitacao() {
     const backendUrl = 'http://localhost:8090'
-
     const [dadosSolicitacao, setDadosSolicitacao] = useState([]);
 
     useEffect(() => {
@@ -26,8 +25,9 @@ function TelaConsultaSolicitacao() {
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
                     Maquina: item.machine.tag,
-                    Descrição: item.description,
                     Prioridade: item.priority.descritpion,
+                    Abertura: item.openingDate,
+                    Usuario: item.responsibleProfessional.name,
                     Status: item.status,
                 }));
 
