@@ -18,21 +18,19 @@ function TelaConsultaSolicitacao() {
     }, [dadosSolicitacao]);
 
     function fetchDataFromBackend() {
-        fetch(`${backendUrl}/api/mhu/`)
+        fetch(`${backendUrl}/api/mpp/serviceSolicitation`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
-                    Nome: item.tag,
-                    Cidade: item.city.name,
-                    Tipo: item.type.description,
+                    Maquina: item.machine.tag,
+                    Descrição: item.description,
+                    Prioridade: item.priority.descritpion,
                     Status: item.status,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setDadosSolicitacao([dadosFormatados]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));

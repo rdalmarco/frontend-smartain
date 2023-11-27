@@ -34,10 +34,12 @@ function Highbar() {
                             <li> <Link to="/cadastros/equipamento">Equipamento</Link></li>
                             <li> <Link to="/cadastros/componente">Componente</Link></li>
                             <li> <Link to="/cadastros/manual">Manual</Link></li>
+                            <li> <Link to="/cadastros/solicitacao">Solicitação</Link></li>
                             <li> <Link to="/cadastros/ordem">Ordem</Link></li>
                             <li> <Link to="/cadastros/plano">Plano</Link></li>
                             <li> <Link to="/cadastros/alerta">Alerta</Link></li>
                             <li> <Link to="/cadastros/usuario">Usuário</Link></li>
+
                         </ul>
                     )}
                 </li>
