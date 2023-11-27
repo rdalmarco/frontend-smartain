@@ -19,6 +19,10 @@ function TelaAlterarMaquina() {
         fetchModel();
     }, []);
 
+    useEffect(() => {
+        console.log('Dados da máquina:', dadosMachine);
+    }, [dadosMachine]);
+
     function fetchValues() {
         fetch(`${backendUrl}/api/mhu/machine/${id}`)
             .then(response => response.json())
@@ -35,6 +39,7 @@ function TelaAlterarMaquina() {
                     WarrantyExpDate: data.warrantyExpDate,
                     Status: data.status
                 };
+
 
                 console.log('XZ', dadosFormatadosAlterar)
                 setDadosMachine([dadosFormatadosAlterar]);

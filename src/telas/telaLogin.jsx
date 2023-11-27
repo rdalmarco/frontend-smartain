@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import '../css/telaLogin.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function TelaLogin() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loggedInUserId, setLoggedInUserId] = useState(null);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     function onMenu() {
 
@@ -19,25 +21,25 @@ function TelaLogin() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ login: username, senha: password }),
+                body: JSON.stringify({ login: username, password: password }),
             });
 
             if (!response.ok) {
                 if (response.status === 401) {
-                    throw new Error('Credenciais inválidas');
+                    throw new Error('Login ou Senha incorretos');
                 } else {
                     throw new Error('Erro ao tentar fazer login');
                 }
+            } else {
+                const userId = await response.text();
+                setLoggedInUserId(userId);
+                navigate('/menu');
             }
 
-            const userId = await response.text();
-            setLoggedInUserId(userId);
+            setError(null);
 
-            setUsername('');
-            setPassword('');
-            setError(null); // Limpar erro se login bem-sucedido
         } catch (err) {
-            setError(err.message);
+            window.alert(err.message);
         }
     };
 
@@ -64,8 +66,7 @@ function TelaLogin() {
                     <button className="logar" onClick={handleLogin}>
                         Logar
                     </button>
-                    {loggedInUserId && <Link to="/menu">Menu</Link>}
-                    {error && <p className="error-message">{error}</p>}
+                    {loggedInUserId}
                 </div>
                 <Link to="/menu">Menu</Link>
             </div>

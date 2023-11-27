@@ -1,8 +1,9 @@
 input.formsCadastro,
 select.formsCadastro {
     width: 100%;
-    height: 35px;
-    display: flex;
+    min-width: 200px;
+    height: auto;
+    display: block;
     flex-direction: column;
     align-items: center;
     justify-content: center;
