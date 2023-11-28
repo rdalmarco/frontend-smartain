@@ -38,26 +38,31 @@ input[type="date"] {
 }
 
 button.formsEnviar {
-        display: flex;
-        justify-content: center;
-        width: 70%;
-        padding: 10px;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 10px;
-        margin: 15px;
-        background-color: darkslategray;
+    display: flex;
+    justify-content: center;
+    width: 20vh;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: darkslategray;
+    position: fixed;
+    right: 20vh;
+    bottom: 5vh;
 }
 
 button.formsExcluir {
     display: flex;
     justify-content: center;
-    width: 70%;
+    width: 20vh;
     padding: 10px;
-    color: #fff;
+    color: white;
     text-decoration: none;
     border-radius: 10px;
-    margin: 15px;
-    background-color: firebrick;
+    margin-top: 15px;
+    background-color: red;
+    position: fixed;
+    left: 20vh;
+    bottom: 5vh;
 }
-

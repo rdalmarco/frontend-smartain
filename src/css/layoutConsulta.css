@@ -4,6 +4,10 @@
 }
 
 .containerConsulta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   background-color: #333333;
   height: 77vh;
   width: 95%;
@@ -82,13 +86,13 @@
 
 .pager {
     position: fixed;
-    bottom: 15%; /* Ajuste conforme necessário para a distância do fundo */
-    left: 50%; /* Coloca o pager no centro da largura da tela */
-    transform: translateX(-50%); /* Centraliza horizontalmente */
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em; /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 1.2em;
     color: white;
     width: 50%;
     border-radius: 10px;

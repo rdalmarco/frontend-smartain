@@ -13,25 +13,10 @@ img {
 .entrarApp {
   textAlign: center;
   display: inline-block;
-  padding: 10px;
   color: #fff;
   text-decoration: none;
   border-radius: 20px;
-  margin: 5px;
   height: 40px;
   width: 200px;
   background-color: darkslategray;
-}
-
-.cadastrarApp {
-  textAlign: center;
-  display: inline-block;
-  padding: 10px;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 20px;
-  margin: 5px;
-  height: 40px;
-  width: 200px;
-  background-color: darkgrey;
 }

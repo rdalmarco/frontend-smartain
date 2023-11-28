@@ -11,9 +11,6 @@ function App() {
                 <Link to="/login">
                     <button className="entrarApp">Entrar</button>
                 </Link>
-                <Link to="/cadastrar">
-                   <button className="cadastrarApp">Cadastrar</button>
-                </Link>
             </div>
         </div>
     );

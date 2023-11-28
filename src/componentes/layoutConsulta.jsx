@@ -83,9 +83,6 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados  }) {
                     onChange={handleFilterChange}
                     placeholder="Digite o valor de filtragem"
                 />
-                <button className="filtrar" type="submit">
-                    Filtrar
-                </button>
                 <Link to={`/cadastros/${valorUrlAdicionar}/cadastrar`}>
                     <button className="adicionar">Adicionar</button>
                 </Link>

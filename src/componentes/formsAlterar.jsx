@@ -79,12 +79,11 @@ function FormsAlterar({campos, backEndUrl })  {
     const handleChangeCampo = (nomeCampo, valorCampo, tipoValue) => {
         let valorConvertido = valorCampo;
 
-        // Verifica o tipo do campo e converte o valor conforme necessário
         if (tipoValue === 'int') {
             valorConvertido = parseInt(valorCampo, 10);
         } else if (tipoValue === 'float') {
             valorConvertido = parseFloat(valorCampo);
-        } // Adicione outras verificações conforme necessário
+        }
 
         setValoresCampos({ ...valoresCampos, [nomeCampo]: valorConvertido });
     };
@@ -101,7 +100,6 @@ function FormsAlterar({campos, backEndUrl })  {
                 console.log('Resposta da requisição de exclusão:', response);
                 navigate(-1);
 
-                // Faça algo após a exclusão, como redirecionar para outra página, etc.
             } catch (error) {
                 console.error('Erro ao excluir:', error);
             }

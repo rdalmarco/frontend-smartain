@@ -3,8 +3,12 @@
 }
 
 .containerLogin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #333333;
-    height: 300px;
+    height: 400px;
     width: 400px;
     margin: auto;
     display: flex;
@@ -12,6 +16,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    color: white;
 }
 
 .campos input {

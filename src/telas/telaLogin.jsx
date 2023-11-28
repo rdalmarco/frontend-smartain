@@ -46,8 +46,8 @@ function TelaLogin() {
 
     return (
         <div className="tittleLogin">
-            <h1>Login</h1>
             <div className="containerLogin">
+                <h1>Entrar</h1>
                 <div className="campos">
                     <p>Email</p>
                     <input

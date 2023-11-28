@@ -8,12 +8,14 @@
 }
 
 .containerCadastro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #333333;
     height: 70vh;
     width: 70%;
     margin: auto;
-    margin-top: 3vh;
-    position: relative;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -21,28 +23,22 @@
     align-items: center;
 }
 
-.buttonsCadastro {
-    position: absolute;
-    bottom: 3%;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
 .buttonsCadastro button {
-    padding: 10px;
     color: #fff;
     text-decoration: none;
     border-radius: 10px;
-    margin: 15px;
 }
 
 .voltarCadastro {
-    position: absolute;
-    left: 60%;
-    bottom: 3%;
+    display: flex;
+    justify-content: center;
+    width: 15vh;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
     background-color: black;
-    height: 40px;
-    width: 200px;
-
+    position: fixed;
+    right: 3vh;
+    top: 3vh;
 }
