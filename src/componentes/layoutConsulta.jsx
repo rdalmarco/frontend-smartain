@@ -57,9 +57,9 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados  }) {
         {
             columns,
             data: filteredData,
-            initialState: { pageIndex: 0, pageSize: 7}, // Defina o estado inicial da paginação
+            initialState: { pageIndex: 0, pageSize: 10},
         },
-        usePagination // Adicione o hook de paginação
+        usePagination
     );
 
     return (

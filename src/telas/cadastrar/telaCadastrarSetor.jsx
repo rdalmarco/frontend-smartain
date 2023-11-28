@@ -20,13 +20,11 @@ function TelaCadastrarSetor() {
                 console.log('Dados recebidos do backend:', data);
 
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosUnit = data.map(item => ({
                     Id: item.id,
                     Nome: item.tag
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setUnits(dadosUnit);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
