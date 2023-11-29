@@ -6,7 +6,6 @@ import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaSetores() {
     const backendUrl = 'http://localhost:8090'
-
     const [dadosSetores, setDadosSetores] = useState([]);
 
     useEffect(() => {
@@ -30,7 +29,6 @@ function TelaConsultaSetores() {
                     Status: item.status,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setDadosSetores([dadosFormatados]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
