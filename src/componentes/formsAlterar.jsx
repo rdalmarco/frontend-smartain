@@ -31,14 +31,14 @@ const CampoSelect = ({ label, options, defaultValue, onChange }) => {
     );
 };
 
-const CampoInput = ({ label, type, defaultValue, onChange }) => {
+const CampoInput = ({ label, type, defaultValue, onChange, readOnly }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
 
     return (
         <div>
-            <input type={type} onChange={handleChange} placeholder={label} defaultValue={defaultValue} className="formsCadastro"/>
+            <input type={type} onChange={handleChange} placeholder={label} defaultValue={defaultValue} className="formsCadastro" readOnly={readOnly}/>
         </div>
     );
 };
@@ -158,6 +158,7 @@ function FormsAlterar({campos, backEndUrl })  {
                             type={campo.tipoCampo}
                             defaultValue={campo.value}
                             name={campo.label}
+                            readOnly={campo.readOnly}
                             onChange={(valor) => handleChangeCampo(campo.label, valor, campo.tipoValue)}
                         />
                     );

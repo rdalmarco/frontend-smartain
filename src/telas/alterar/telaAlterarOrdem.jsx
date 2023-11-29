@@ -8,74 +8,102 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarOrdem() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
+    const [machines, setMachines] = useState([]);
+    const [causes, setCauses] = useState([]);
+    const [prioritys, setPrioritys] = useState([]);
     const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [dadosOrdem, setDadosOrdem] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchMachine();
+        fetchCause();
+        fetchPriority();
+        fetchTypes();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mpp/serviceOrder/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Maquina: data.machine.id,
+                    Prioridade: data.priority.id,
+                    UsuarioAbertura: data.openingUser.name,
+                    TipoManutencao: data.maintenanceType.id,
+                    TempoEstimado: data.estimatedDuration,
                     Status: data.status,
-                    Address: data.address,
                 };
 
-                console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                console.log('Dados Formatados', dadosFormatadosAlterar)
+                setDadosOrdem([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
+                const dadosMachine = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
+                setMachines(dadosMachine);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
+    function fetchCause() {
+        fetch(`${backendUrl}/api/mpp/serviceCause`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosCause = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
+                setCauses(dadosCause);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchPriority() {
+        fetch(`${backendUrl}/api/mpp/servicePriority`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosPriority = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.descritpion
+                }));
+
+                setPrioritys(dadosPriority);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchTypes() {
+        fetch(`${backendUrl}/api/mpp/maintenanceType`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosType = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.descritpion
+                }));
+
                 setTypes(dadosType);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -83,46 +111,72 @@ function TelaAlterarOrdem() {
 
     const camposFormulario = [
         {
+            tipo: 'select',
+            label: 'machineId',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
+            tipoValue: 'int',
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Maquina : '',
+        },
+        {
+            tipo: 'input',
+            label: 'Nome Usuario Responsável',
+            tipoCampo: 'text',
+            tipoValue: 'int',
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].UsuarioAbertura : '',
+            readOnly : true,
+        },
+        {
+            tipo: 'select',
+            label: 'priorityId',
+            opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Prioridade : '',
+            tipoValue: 'int',
+        },
+        {
             tipo: 'hidden',
-            label: 'customerId',
+            label: 'generationTypeId',
             tipoCampo: 'text',
             value: 1,
             tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'tag',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            label: 'estimatedDuration',
+            tipoCampo: 'time',
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].TempoEstimado : '',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
-            tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
-        },
-        {
-            tipo: 'select',
-            label: 'typeId',
+            label: 'maintenanceTypeId',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
             tipoValue: 'int',
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].TipoManutencao : '',
+        },
+        {
+            tipo: 'select',
+            label: 'serviceCauseId',
+            opcoes: causes.map(cause => ({ value: cause.Id, label: cause.Nome })),
+            tipoValue: 'int',
+            value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Causa : '',
         },
         {
             tipo: 'select',
             label: 'status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Nao Iniciada' },
+                { value: 2, label: 'Agendada' },
+                { value: 3, label: 'Em Progresso' },
+                { value: 4, label: 'Suspensa' },
+                { value: 5, label: 'Completa' },
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosOrdem && dadosOrdem.length > 0
+                ? (dadosOrdem[0].Status === 'NOT_STARTED' ? 1
+                    : dadosOrdem[0].Status === 'SCHEDULED' ? 2
+                        : dadosOrdem[0].Status === 'IN_PROGRESS' ? 3
+                            : dadosOrdem[0].Status === 'SUSPENDED' ? 4
+                                : dadosOrdem[0].Status === 'COMPLETED' ? 5
+                                  : null)
+                : null,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +185,7 @@ function TelaAlterarOrdem() {
         <div className="tittleAlterarOrdem">
             <Highbar/>
             <LayoutCadastro titulo="Ordem de Manutenção" valorUrlAdicionar="ordem">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceOrder`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
