@@ -52,7 +52,7 @@ function TelaAlterarModelo() {
     }
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/mhu/machineModel/${id}`)
+        fetch(`${backendUrl}/api/mhu/model/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -62,7 +62,7 @@ function TelaAlterarModelo() {
                     Manufacturer: data.manufacturer.id,
                     Model: data.model,
                     Dimensions: data.dimensions,
-                    MachineModelType: data.machineModelType.id,
+                    Tipo: data.domainType,
                     Status: data.Status,
                 };
 
@@ -94,9 +94,13 @@ function TelaAlterarModelo() {
         },
         {
             tipo: 'select',
-            label: 'machineModelTypeId',
-            opcoes: modelTypes.map(modelType => ({ value: modelType.Id, label: modelType.Nome })),
-            value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].MachineModelType : '',
+            label: 'domainType',
+            opcoes: [
+                { value: 1, label: 'Maquina' },
+                { value: 2, label: 'Equipamento' },
+                { value: 3, label: 'Componente' }
+            ],
+            value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].Tipo : '',
             tipoValue: 'int',
         },
         {
@@ -116,7 +120,7 @@ function TelaAlterarModelo() {
         <div className="tittleAlterarModelo">
             <Highbar/>
             <LayoutCadastro titulo="Modelo" valorUrlAdicionar="modelo">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/machineModel`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/model`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

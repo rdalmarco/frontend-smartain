@@ -6,39 +6,66 @@ import FormsCadastro from "../../componentes/formsCadastro";
 
 function TelaCadastrarEquipamento() {
     const backendUrl = 'http://localhost:8090'
+    const [models, setModels] = useState([]);
+    const [machines, setMachines] = useState([]);
 
     useEffect(() => {
+        fetchModel();
+        fetchMachine();
     }, []);
 
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosMachine = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
+                }));
+
+                setMachines(dadosMachine);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchModel() {
+        fetch(`${backendUrl}/api/mhu/model`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosModel = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.name
+                }));
+                setModels(dadosModel);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
+            tipo: 'input',
+            label: 'name',
             tipoCampo: 'text',
-            defaultValue: 1,
-            tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'technicalData',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: '',
+            label: 'modelId',
+            opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
         },
         {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-        },
-        {
             tipo: 'select',
-            label: 'typeId',
-            opcoes: '',
+            label: 'machineId',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
         },
         {
@@ -53,7 +80,7 @@ function TelaCadastrarEquipamento() {
         <div className="tittleCadastrarEquipamento">
             <Highbar/>
             <LayoutCadastro titulo="Equipamento" valorUrlAdicionar="equipamento">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/equipment`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

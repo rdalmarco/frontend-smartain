@@ -8,112 +8,95 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarEquipamento() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [models, setModels] = useState([]);
+    const [machines, setMachines] = useState([]);
+    const [dadosEquipamento, setDadosEquipamento] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchModel();
+        fetchMachine();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mhu/equipment/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Nome: data.name,
+                    Descrição: data.technicalData,
+                    Model : data.model.model,
+                    Maquina : data.machine.tag,
                     Status: data.status,
-                    Address: data.address,
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosEquipamento([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
+                const dadosMachine = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
+                setMachines(dadosMachine);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
+    function fetchModel() {
+        fetch(`${backendUrl}/api/mhu/model`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosModel = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                setModels(dadosModel);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
+            tipo: 'input',
+            label: 'name',
             tipoCampo: 'text',
-            value: 1,
-            tipoValue: 'int',
+            value : dadosEquipamento && dadosEquipamento.length > 0 ? dadosEquipamento[0].Nome : '',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'technicalData',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            value : dadosEquipamento && dadosEquipamento.length > 0 ? dadosEquipamento[0].Descrição : '',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
+            label: 'modelId',
+            opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
+            value : dadosEquipamento && dadosEquipamento.length > 0 ? dadosEquipamento[0].Model : '',
         },
         {
             tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
+            label: 'machineId',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
+            value : dadosEquipamento && dadosEquipamento.length > 0 ? dadosEquipamento[0].Maquina : '',
         },
         {
             tipo: 'select',
@@ -122,7 +105,7 @@ function TelaAlterarEquipamento() {
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosEquipamento && dadosEquipamento.length > 0 && dadosEquipamento[0].Status === 'ACTIVE' ? 0 : 1,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +114,7 @@ function TelaAlterarEquipamento() {
         <div className="tittleAlterarEquipamento">
             <Highbar/>
             <LayoutCadastro titulo="Equipamento" valorUrlAdicionar="equipamento">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/equipment`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

@@ -17,7 +17,7 @@ function TelaConsultaModelos() {
     }, [dadosModelos]);
 
     function fetchDataFromBackend() {
-        fetch(`${backendUrl}/api/mhu/machineModel`)
+        fetch(`${backendUrl}/api/mhu/model`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -29,7 +29,6 @@ function TelaConsultaModelos() {
                     Status: item.status,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setDadosModelos([dadosFormatados]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));

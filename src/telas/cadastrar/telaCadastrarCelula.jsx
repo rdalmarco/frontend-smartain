@@ -6,7 +6,6 @@ import FormsCadastro from "../../componentes/formsCadastro";
 
 function TelaCadastrarCelula() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
     const [sectors, setSectors] = useState([]);
 
     useEffect(() => {
@@ -20,13 +19,11 @@ function TelaCadastrarCelula() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosSector = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setSectors(dadosSector);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
