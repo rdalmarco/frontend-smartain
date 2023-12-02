@@ -4,6 +4,7 @@ import '../css/forms.css'
 
 
 const CampoTextarea = ({ label, defaultValue, onChange, placeholder }) => {
+
     const handleChange = (e) => {
         onChange(e.target.value);
     };
@@ -20,14 +21,20 @@ const CampoTextarea = ({ label, defaultValue, onChange, placeholder }) => {
     );
 };
 
-const CampoSelect = ({ label, options, onChange, placeholder }) => {
+const CampoSelect = ({ label, options, onChange, placeholder, defaultValue }) => {
+    const [selectedValue, setSelectedValue] = useState(defaultValue);
+
+    useEffect(() => {
+        setSelectedValue(defaultValue);
+    }, [defaultValue]);
+
     const handleChange = (e) => {
         onChange(e.target.value);
     };
 
     return (
         <div>
-            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro">
+            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro" value={selectedValue}>
                 <option value="" disabled selected>
                     {placeholder}
                 </option>
@@ -110,6 +117,7 @@ function FormsCadastro({campos, backEndUrl})  {
                                     key={index}
                                     label={campo.label}
                                     options={campo.opcoes}
+                                    defaultValue={campo.defaultValue}
                                     placeholder={campo.placeholder}
                                     onChange={(valor) =>
                                         handleChangeCampo(campo.label, valor, campo.tipoValue)
@@ -132,9 +140,25 @@ function FormsCadastro({campos, backEndUrl})  {
                                     className="formsCadastro"
                                 />
                             );
-                        }
+                        } else if (campo.tipo === 'inputTime' || campo.tipo === 'inputDate') {
+                            return (
+                             <div>
+                                 <label htmlFor="">{campo.placeholder}:</label>
+                                <CampoInput
+                                    key={index}
+                                    label={campo.label}
+                                    type={campo.tipoCampo}
+                                    defaultValue={campo.defaultValue}
+                                    name={campo.label}
+                                    onChange={(valor) =>
+                                        handleChangeCampo(campo.label, valor, campo.tipoValue)
+                                    }
+                                    className="formsCadastro"
+                                />
+                            </div>
+                            );
                         return null;
-                    })}
+                    }})}
                 </div>
                 <div className="textareaColumn">
                     {campos

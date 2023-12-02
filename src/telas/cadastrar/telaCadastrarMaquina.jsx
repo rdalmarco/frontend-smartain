@@ -74,13 +74,13 @@ function TelaCadastrarMaquina() {
             tipoValue: 'int',
         },
         {
-            tipo: 'input',
+            tipo: 'inputDate',
             label: 'acquisitionDate',
             placeholder: 'Data de Aquisição',
             tipoCampo: 'date',
         },
         {
-            tipo: 'input',
+            tipo: 'inputDate',
             label: 'warrantyExpDate',
             placeholder: 'Data de Fim da Garantia',
             tipoCampo: 'date',

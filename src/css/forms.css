@@ -66,3 +66,10 @@ button.formsExcluir {
     left: 20vh;
     bottom: 5vh;
 }
+
+label {
+    color: dimgray;
+    font-weight: bold;
+    position: relative;
+    left: 2vh;
+}

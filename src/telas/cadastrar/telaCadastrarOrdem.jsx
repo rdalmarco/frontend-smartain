@@ -3,6 +3,7 @@ import LayoutCadastro from "../../componentes/layoutCadastro";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
 import FormsCadastro from "../../componentes/formsCadastro";
+import { useLocation } from "react-router-dom";
 
 function TelaCadastrarOrdem() {
     const backendUrl = 'http://localhost:8090'
@@ -82,6 +83,10 @@ function TelaCadastrarOrdem() {
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
+    const location = useLocation();
+    const dadosOrdem = location.state && location.state.dadosOrdem;
+    console.log(dadosOrdem)
+
     const camposFormulario = [
         {
             tipo: 'select',
@@ -89,6 +94,7 @@ function TelaCadastrarOrdem() {
             placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
+            defaultValue: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : ''
         },
         {
             tipo: 'hidden',
@@ -119,8 +125,8 @@ function TelaCadastrarOrdem() {
             tipoValue: 'int',
         },
         {
-            tipo: 'input',
-            placeholder: 'Duração Estimada',
+            tipo: 'inputTime',
+            placeholder: 'Duração Estimada (HH:MM)',
             label: 'estimatedDuration',
             tipoCampo: 'time',
         },
@@ -137,6 +143,16 @@ function TelaCadastrarOrdem() {
             placeholder: 'Causa',
             opcoes: causes.map(cause => ({ value: cause.Id, label: cause.Nome })),
             tipoValue: 'int',
+        },
+        {
+            tipo: 'select',
+            label: 'solicitationId',
+            placeholder: 'Código da Solicitação',
+            opcoes: dadosOrdem && dadosOrdem.Solicitacao
+                ? [{ value: dadosOrdem.Solicitacao, label: dadosOrdem.Solicitacao }]
+                : [],
+            tipoValue: 'int',
+            defaultValue: dadosOrdem && dadosOrdem.Solicitacao ? dadosOrdem.Solicitacao : ''
         },
     ];
 

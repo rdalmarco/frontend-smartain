@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import LayoutCadastro from "../../componentes/layoutCadastro";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import FormsCadastro from "../../componentes/formsCadastro";
+import { useNavigate } from "react-router-dom";
 import FormsAlterar from "../../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
+import "../../css/telaAlterarSolicitacao.css";
 
 function TelaAlterarSolicitacao() {
     const backendUrl = 'http://localhost:8090'
@@ -13,6 +14,7 @@ function TelaAlterarSolicitacao() {
     const [prioritys, setPrioritys] = useState([]);
     const [types, setTypes] = useState([]);
     const [dadosSolicitacao, setDadosSolicitacao] = useState([]);
+    const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
@@ -22,6 +24,16 @@ function TelaAlterarSolicitacao() {
         fetchPriority();
         fetchTypes();
     }, []);
+
+    function handleGerarOrdem() {
+        const dadosOrdem = {
+            Maquina : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Machine : '',
+            Solicitacao : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Id : '',
+        };
+
+        navigate("/cadastros/ordem/cadastrar", { state: { dadosOrdem } });
+
+    }
 
     function fetchValues() {
         fetch(`${backendUrl}/api/mpp/serviceSolicitation/${id}`)
@@ -177,6 +189,9 @@ function TelaAlterarSolicitacao() {
             <LayoutCadastro titulo="Solicitacao de Serviço" valorUrlAdicionar="solicitacao">
                 <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceSolicitation`} />
             </LayoutCadastro>
+            <div className="buttonGerar">
+                <button onClick={handleGerarOrdem}>Gerar Ordem</button>
+            </div>
             <Bottombar/>
         </div>
     );

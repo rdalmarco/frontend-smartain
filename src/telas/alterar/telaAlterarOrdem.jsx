@@ -36,6 +36,8 @@ function TelaAlterarOrdem() {
                     UsuarioAbertura: data.openingUser.name,
                     TipoManutencao: data.maintenanceType.id,
                     TempoEstimado: data.estimatedDuration,
+                    Causa: data.serviceCause.id,
+                    Solicitacao: data.serviceSolicitation.id,
                     Status: data.status,
                 };
 
@@ -158,6 +160,15 @@ function TelaAlterarOrdem() {
             opcoes: causes.map(cause => ({ value: cause.Id, label: cause.Nome })),
             tipoValue: 'int',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Causa : '',
+        },
+        {
+            tipo: 'select',
+            label: 'solicitationId',
+            opcoes: dadosOrdem && dadosOrdem.length > 0
+                ? [{ value: dadosOrdem[0].Solicitacao, label: dadosOrdem[0].Solicitacao }]
+                : [{ value: 0, label: 'Ordem gerada manualmente'}],
+            tipoValue: 'int',
+            value: dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Solicitacao : '0'
         },
         {
             tipo: 'select',
