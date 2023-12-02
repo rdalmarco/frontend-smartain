@@ -52,10 +52,12 @@ function TelaCadastrarPlano() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
+            placeholder: 'Unidade Fabril',
             label: 'unitId',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
             tipoValue: 'int',
@@ -69,6 +71,7 @@ function TelaCadastrarPlano() {
         },
         {
             tipo: 'select',
+            placeholder: 'Usuário Responsável',
             label: 'userId',
             opcoes: users.map(user => ({ value: user.Id, label: user.Nome })),
             tipoValue: 'int',

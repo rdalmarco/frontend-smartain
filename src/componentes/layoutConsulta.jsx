@@ -43,9 +43,9 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados  }) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        page, // Substitua 'rows' por 'page'
+        page,
         prepareRow,
-        state: { pageIndex, pageSize }, // Adicione o state para controle da paginação
+        state: { pageIndex, pageSize },
         gotoPage,
         nextPage,
         previousPage,
@@ -57,7 +57,7 @@ function LayoutConsulta({ titulo, valorUrlAdicionar, dados  }) {
         {
             columns,
             data: filteredData,
-            initialState: { pageIndex: 0, pageSize: 10},
+            initialState: { pageIndex: 0, pageSize: 7},
         },
         usePagination
     );

@@ -37,14 +37,11 @@ function TelaCadastrarUnidadeFabril() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosType = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setTypes(dadosType);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -61,22 +58,26 @@ function TelaCadastrarUnidadeFabril() {
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Unidade Fabril',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'cityId',
+            placeholder: 'Cidade',
             opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'address',
+            placeholder: 'Endereço',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'typeId',
+            placeholder: 'Tipo de Unidade',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             tipoValue: 'int',
         },

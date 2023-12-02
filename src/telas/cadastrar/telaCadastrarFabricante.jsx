@@ -15,21 +15,25 @@ function TelaCadastrarFabricante() {
         {
             tipo: 'input',
             label: 'socialReason',
+            placeholder: 'Razão Social',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'cnpj',
+            placeholder: 'CNPJ',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'phone',
+            placeholder: 'Telefone',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'email',
+            placeholder: 'Email',
             tipoCampo: 'text',
         },
         {

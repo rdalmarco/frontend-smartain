@@ -49,22 +49,26 @@ function TelaCadastrarEquipamento() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'technicalData',
+            placeholder: 'Descrição Técnica',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'modelId',
+            placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
         },

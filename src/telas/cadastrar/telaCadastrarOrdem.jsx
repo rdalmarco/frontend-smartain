@@ -86,6 +86,7 @@ function TelaCadastrarOrdem() {
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
         },
@@ -99,6 +100,7 @@ function TelaCadastrarOrdem() {
         {
             tipo: 'select',
             label: 'priorityId',
+            placeholder: 'Prioridade',
             opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
             tipoValue: 'int',
         },
@@ -118,18 +120,21 @@ function TelaCadastrarOrdem() {
         },
         {
             tipo: 'input',
+            placeholder: 'Duração Estimada',
             label: 'estimatedDuration',
             tipoCampo: 'time',
         },
         {
             tipo: 'select',
             label: 'maintenanceTypeId',
+            placeholder: 'Tipo de Manutenção',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'select',
             label: 'serviceCauseId',
+            placeholder: 'Causa',
             opcoes: causes.map(cause => ({ value: cause.Id, label: cause.Nome })),
             tipoValue: 'int',
         },

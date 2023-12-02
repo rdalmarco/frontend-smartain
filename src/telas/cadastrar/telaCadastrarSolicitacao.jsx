@@ -86,6 +86,7 @@ function TelaCadastrarSolicitacao() {
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
         },
@@ -106,23 +107,27 @@ function TelaCadastrarSolicitacao() {
         {
             tipo: 'textarea',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'priorityId',
+            placeholder: 'Prioridade',
             opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'select',
             label: 'symptomId',
+            placeholder: 'Sintoma',
             opcoes: symptoms.map(symptom => ({ value: symptom.Id, label: symptom.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'select',
             label: 'maintenanceTypeId',
+            placeholder: 'Tipo de Manutenção',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             tipoValue: 'int',
         },

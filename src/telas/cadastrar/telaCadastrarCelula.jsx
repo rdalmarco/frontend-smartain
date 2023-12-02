@@ -33,22 +33,26 @@ function TelaCadastrarCelula() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'sectorId',
+            placeholder: 'Setor',
             opcoes: sectors.map(sector => ({ value: sector.Id, label: sector.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Tag',
             tipoCampo: 'text',
         },
         {

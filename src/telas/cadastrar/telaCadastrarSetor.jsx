@@ -34,22 +34,26 @@ function TelaCadastrarSetor() {
         {
             tipo: 'select',
             label: 'unitId',
+            placeholder: 'Unidade Fabril',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Tag',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
         },
         {

@@ -50,33 +50,39 @@ function TelaCadastrarMaquina() {
         {
             tipo: 'select',
             label: 'productionCellId',
+            placeholder: 'Célula de Produção',
             opcoes: cells.map(cell => ({ value: cell.Id, label: cell.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'technicalData',
+            placeholder: 'Descrição Técnica',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Tag',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'machineModelId',
+            placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'acquisitionDate',
+            placeholder: 'Data de Aquisição',
             tipoCampo: 'date',
         },
         {
             tipo: 'input',
             label: 'warrantyExpDate',
+            placeholder: 'Data de Fim da Garantia',
             tipoCampo: 'date',
         },
         {

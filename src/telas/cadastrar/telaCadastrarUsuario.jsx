@@ -11,21 +11,25 @@ function TelaCadastrarUsuario() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'login',
+            placeholder: 'Login',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'email',
+            placeholder: 'Email',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'password',
+            placeholder: 'Senha',
             tipoCampo: 'password',
         },
         {

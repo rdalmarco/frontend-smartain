@@ -18,8 +18,7 @@ function TelaConsultaCelulas() {
   }, [dadosCelulas]);
 
   function fetchDataFromBackend() {
-    /* Adicionado um "1" no final da URL para testar o erro. */
-    fetch(`${backendUrl}/api/mhu/productionCell1`)
+    fetch(`${backendUrl}/api/mhu/productionCell`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Erro ao consultar os dados. ${response.statusText}`);

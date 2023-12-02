@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import '../css/forms.css'
 
 
-const CampoTextarea = ({ label, defaultValue, onChange }) => {
+const CampoTextarea = ({ label, defaultValue, onChange, placeholder }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
@@ -12,7 +12,7 @@ const CampoTextarea = ({ label, defaultValue, onChange }) => {
         <div>
             <textarea
                 onChange={handleChange}
-                placeholder={label}
+                placeholder={placeholder}
                 defaultValue={defaultValue}
                 className="formsCadastro"
             />
@@ -20,16 +20,16 @@ const CampoTextarea = ({ label, defaultValue, onChange }) => {
     );
 };
 
-const CampoSelect = ({ label, options, onChange }) => {
+const CampoSelect = ({ label, options, onChange, placeholder }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
 
     return (
         <div>
-            <select onChange={handleChange} placeholder={label} className="formsCadastro">
+            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro">
                 <option value="" disabled selected>
-                    {label}
+                    {placeholder}
                 </option>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>
@@ -41,14 +41,14 @@ const CampoSelect = ({ label, options, onChange }) => {
     );
 };
 
-const CampoInput = ({ label, type, defaultValue, onChange }) => {
+const CampoInput = ({ label, type, defaultValue, onChange, placeholder }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
 
     return (
         <div>
-            <input type={type} onChange={handleChange} placeholder={label} defaultValue={defaultValue} className="formsCadastro"/>
+            <input type={type} onChange={handleChange} placeholder={placeholder} defaultValue={defaultValue} className="formsCadastro"/>
         </div>
     );
 };
@@ -110,6 +110,7 @@ function FormsCadastro({campos, backEndUrl})  {
                                     key={index}
                                     label={campo.label}
                                     options={campo.opcoes}
+                                    placeholder={campo.placeholder}
                                     onChange={(valor) =>
                                         handleChangeCampo(campo.label, valor, campo.tipoValue)
                                     }
@@ -124,6 +125,7 @@ function FormsCadastro({campos, backEndUrl})  {
                                     type={campo.tipoCampo}
                                     defaultValue={campo.defaultValue}
                                     name={campo.label}
+                                    placeholder={campo.placeholder}
                                     onChange={(valor) =>
                                         handleChangeCampo(campo.label, valor, campo.tipoValue)
                                     }
@@ -142,6 +144,7 @@ function FormsCadastro({campos, backEndUrl})  {
                                 key={index}
                                 label={campo.label}
                                 defaultValue={campo.defaultValue}
+                                placeholder={campo.placeholder}
                                 onChange={(valor) =>
                                     handleChangeCampo(campo.label, valor, campo.tipoValue)
                                 }

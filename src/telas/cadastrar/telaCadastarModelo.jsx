@@ -50,22 +50,26 @@ function TelaCadastrarModelo() {
         {
             tipo: 'select',
             label: 'manufacturerId',
+            placeholder: 'Unidade Fabril',
             opcoes: manufactures.map(manufacturer => ({ value: manufacturer.Id, label: manufacturer.Nome })),
             tipoValue: 'int',
         },
         {
             tipo: 'input',
             label: 'model',
+            placeholder: 'Modelo',
             tipoCampo: 'text',
         },
         {
             tipo: 'input',
             label: 'dimensions',
+            placeholder: 'Dimensões',
             tipoCampo: 'text',
         },
         {
             tipo: 'select',
             label: 'domainType',
+            placeholder: 'Tipo do Modelo',
             opcoes: [
                 { value: 1, label: 'Maquina' },
                 { value: 2, label: 'Equipamento' },
