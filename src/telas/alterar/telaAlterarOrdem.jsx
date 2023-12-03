@@ -174,8 +174,8 @@ function TelaAlterarOrdem() {
             opcoes: dadosOrdem && dadosOrdem.length > 0
                 ? (dadosOrdem[0].Solicitacao
                     ? [{ value: dadosOrdem[0].Solicitacao, label: dadosOrdem[0].Solicitacao }]
-                    : [{ value: 0, label: 'Sem Ordem' }])
-                : [{ value: 0, label: 'Sem Ordem' }],
+                    : [{ value: 0, label: 'Sem Solicitação' }])
+                : [{ value: 0, label: 'Sem Solicitação' }],
             tipoValue: 'int',
             value: dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Solicitacao : '0'
         },

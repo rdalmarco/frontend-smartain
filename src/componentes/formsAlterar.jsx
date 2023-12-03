@@ -122,7 +122,7 @@ function FormsAlterar({campos, backEndUrl })  {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dataSend), // Dados a serem enviados para o backend
+                body: JSON.stringify(dataSend),
 
             });
 

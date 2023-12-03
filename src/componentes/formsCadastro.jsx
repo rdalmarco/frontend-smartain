@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../css/forms.css'
 
-
 const CampoTextarea = ({ label, defaultValue, onChange, placeholder }) => {
 
     const handleChange = (e) => {
@@ -21,7 +20,7 @@ const CampoTextarea = ({ label, defaultValue, onChange, placeholder }) => {
     );
 };
 
-const CampoSelect = ({ label, options, onChange, placeholder, defaultValue }) => {
+const CampoSelect = ({ label, options, onChange, placeholder, defaultValue, boolConfere}) => {
     const [selectedValue, setSelectedValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -29,12 +28,14 @@ const CampoSelect = ({ label, options, onChange, placeholder, defaultValue }) =>
     }, [defaultValue]);
 
     const handleChange = (e) => {
-        onChange(e.target.value);
+        const selectedVal = e.target.value;
+        setSelectedValue(selectedVal);
+        onChange(selectedVal);
     };
 
     return (
         <div>
-            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro" value={selectedValue}>
+            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro" value={selectedValue} >
                 <option value="" disabled selected>
                     {placeholder}
                 </option>
@@ -73,24 +74,32 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
         setValoresCampos(initialFieldValues);
     }, [campos]);
 
-    const handleChangeCampo = async (nomeCampo, valorCampo, tipoValue) => {
+    async function handleChangeCampo(nomeCampo, valorCampo, tipoValue) {
         let valorConvertido = valorCampo;
 
         try {
             if (tipoValue === 'int') {
-                valorConvertido = parseInt(valorCampo, 10);
+                valorConvertido = parseInt(valorConvertido, 10);
             } else if (tipoValue === 'float') {
-                valorConvertido = parseFloat(valorCampo);
+                valorConvertido = parseFloat(valorConvertido);
             }
 
-            setValoresCampos({...valoresCampos, [nomeCampo]: valorConvertido});
-
+            setValoresCampos(prevState => ({
+                ...prevState,
+                [nomeCampo]: valorConvertido
+            }));
+            console.log('Valores setados', valoresCampos);
         } catch (error) {
             console.error('Erro ao conferir garantia:', error);
         }
-    };
+    }
 
     const handleSubmit = async () => {
+
+        if (conferirGarantia !== null) {
+            await conferirGarantia(valoresCampos['machineId']);
+        }
+
         console.log('Valores enviados ao backend: ', valoresCampos)
         console.log('Valores JSON', JSON.stringify(valoresCampos))
         try {
@@ -99,12 +108,11 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(valoresCampos), // Dados a serem enviados para o backend
+                body: JSON.stringify(valoresCampos),
             });
 
             console.log('Resposta da requisição:', response);
             navigate(-1)
-
 
         } catch (error) {
             console.error('Erro ao enviar para o backend:', error);
@@ -125,8 +133,8 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
                                     defaultValue={campo.value}
                                     placeholder={campo.placeholder}
                                     onChange={(valor) =>
-                                        handleChangeCampo(campo.label, valor, campo.tipoValue)
-                                    }
+                                        handleChangeCampo(campo.label, valor, campo.tipoValue, campo.boolConfere)
+                                   }
                                     className="formsCadastro"
                                 />
                             );

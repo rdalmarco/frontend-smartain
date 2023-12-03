@@ -35,7 +35,7 @@ function TelaCadastrarOrdem() {
     }, [garantiaData]);
 
     function conferirGarantia(id) {
-            fetchMachineId(id)
+         fetchMachineId(id);
     }
 
     function fetchMachineId(id) {
@@ -129,7 +129,8 @@ function TelaCadastrarOrdem() {
             placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
-            value: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : ''
+            value: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : '',
+            defaultValue: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : '',
         },
         {
             tipo: 'hidden',
@@ -187,6 +188,7 @@ function TelaCadastrarOrdem() {
                 ? [{ value: dadosOrdem.Solicitacao, label: dadosOrdem.Solicitacao }]
                 : [],
             tipoValue: 'int',
+            value: dadosOrdem && dadosOrdem.Solicitacao ? dadosOrdem.Solicitacao : '',
             defaultValue: dadosOrdem && dadosOrdem.Solicitacao ? dadosOrdem.Solicitacao : ''
         },
     ];
@@ -195,7 +197,7 @@ function TelaCadastrarOrdem() {
         <div className="tittleCadastrarOrdem">
             <Highbar/>
             <LayoutCadastro titulo="Ordem de Serviço" valorUrlAdicionar="ordem">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceOrder`} conferirGarantia={conferirGarantia}/>
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceOrder`}   conferirGarantia={conferirGarantia}/>
             </LayoutCadastro>
             <Bottombar/>
         </div>
