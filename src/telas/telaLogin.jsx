@@ -51,7 +51,7 @@ function TelaLogin() {
                 <div className="campos">
                     <p>Email</p>
                     <input
-                        className="email"
+                        className="Login"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}

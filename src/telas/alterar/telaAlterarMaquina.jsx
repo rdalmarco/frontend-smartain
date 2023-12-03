@@ -34,12 +34,11 @@ function TelaAlterarMaquina() {
                     Tag: data.tag,
                     Cell: data.productionCell.id,
                     TechnicalData: data.technicalData,
-                    MachineModel: data.machineModel.id,
+                    MachineModel: data.model.id,
                     AcquisitionDate: data.acquisitionDate,
                     WarrantyExpDate: data.warrantyExpDate,
                     Status: data.status
                 };
-
 
                 console.log('XZ', dadosFormatadosAlterar)
                 setDadosMachine([dadosFormatadosAlterar]);
@@ -64,7 +63,7 @@ function TelaAlterarMaquina() {
     }
 
     function fetchModel() {
-        fetch(`${backendUrl}/api/mhu/machineModel`)
+        fetch(`${backendUrl}/api/mhu/model`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -81,8 +80,16 @@ function TelaAlterarMaquina() {
 
     const camposFormulario = [
         {
+            tipo: 'input',
+            label: 'tag',
+            placeholder: 'Tag',
+            tipoCampo: 'text',
+            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].Tag : '',
+        },
+        {
             tipo: 'select',
             label: 'productionCellId',
+            placeholder: 'Célula de Produção',
             opcoes: cells.map(cell => ({ value: cell.Id, label: cell.Nome })),
             tipoValue: 'int',
             value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].Cell : '',
@@ -90,37 +97,36 @@ function TelaAlterarMaquina() {
         {
             tipo: 'input',
             label: 'technicalData',
+            placeholder: 'Descrição Técnica',
             tipoCampo: 'text',
             value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].TechnicalData : '',
         },
         {
-            tipo: 'input',
-            label: 'tag',
-            tipoCampo: 'text',
-            value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].Tag : '',
-        },
-        {
             tipo: 'select',
-            label: 'machineModelId',
+            label: 'modelId',
+            placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
             value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].MachineModel : '',
         },
         {
-            tipo: 'input',
+            tipo: 'inputDate',
             label: 'acquisitionDate',
+            placeholder: 'Data de Aquisição',
             tipoCampo: 'date',
             value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].AcquisitionDate : '',
         },
         {
-            tipo: 'input',
+            tipo: 'inputDate',
             label: 'warrantyExpDate',
+            placeholder: 'Data de Fim da Garantia',
             tipoCampo: 'date',
             value: dadosMachine && dadosMachine.length > 0 ? dadosMachine[0].WarrantyExpDate : '',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 1, label: 'Ativo' },
                 { value: 2, label: 'Inativo' }

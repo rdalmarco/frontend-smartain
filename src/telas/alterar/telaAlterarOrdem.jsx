@@ -115,6 +115,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Maquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Maquina : '',
@@ -130,6 +131,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'select',
             label: 'priorityId',
+            placeholder: 'Prioridade',
             opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Prioridade : '',
             tipoValue: 'int',
@@ -142,14 +144,16 @@ function TelaAlterarOrdem() {
             tipoValue: 'int',
         },
         {
-            tipo: 'input',
+            tipo: 'inputTime',
             label: 'estimatedDuration',
+            placeholder: 'Duração Estimada (HH:MM)',
             tipoCampo: 'time',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].TempoEstimado : '',
         },
         {
             tipo: 'select',
             label: 'maintenanceTypeId',
+            placeholder: 'Tipo de Manutenção',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             tipoValue: 'int',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].TipoManutencao : '',
@@ -157,6 +161,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'select',
             label: 'serviceCauseId',
+            placeholder: 'Causa',
             opcoes: causes.map(cause => ({ value: cause.Id, label: cause.Nome })),
             tipoValue: 'int',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Causa : '',
@@ -164,6 +169,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'select',
             label: 'solicitationId',
+            placeholder: 'Solicitação',
             opcoes: dadosOrdem && dadosOrdem.length > 0
                 ? [{ value: dadosOrdem[0].Solicitacao, label: dadosOrdem[0].Solicitacao }]
                 : [{ value: 0, label: 'Ordem gerada manualmente'}],
@@ -173,6 +179,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 1, label: 'Nao Iniciada' },
                 { value: 2, label: 'Agendada' },

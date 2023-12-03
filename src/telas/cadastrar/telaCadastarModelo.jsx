@@ -10,7 +10,6 @@ function TelaCadastrarModelo() {
     const [manufactures, setManufactures] = useState([]);
 
     useEffect(() => {
-        fetchModelType();
         fetchManufacturer();
     }, []);
 
@@ -30,27 +29,11 @@ function TelaCadastrarModelo() {
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchModelType() {
-        fetch(`${backendUrl}/api/mhu/machineModelType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-                const dadosModelTypes = data.map(item => ({
-                    Id: item.id,
-                    Nome: item.description
-                }));
-
-                setModelTypes(dadosModelTypes);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
     const camposFormulario = [
         {
             tipo: 'select',
             label: 'manufacturerId',
-            placeholder: 'Unidade Fabril',
+            placeholder: 'Fabricante',
             opcoes: manufactures.map(manufacturer => ({ value: manufacturer.Id, label: manufacturer.Nome })),
             tipoValue: 'int',
         },

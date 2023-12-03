@@ -64,24 +64,28 @@ function TelaAlterarCelula() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
             value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
             value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Description : '',
         },
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Tag',
             tipoCampo: 'text',
             value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Tag : '',
         },
         {
             tipo: 'select',
             label: 'sectorId',
+            placeholder: 'Setor',
             opcoes: sectors.map(sector => ({ value: sector.Id, label: sector.Nome })),
             tipoValue: 'int',
             value: dadosCelula && dadosCelula.length > 0 ? dadosCelula[0].Sector : '',
@@ -89,6 +93,7 @@ function TelaAlterarCelula() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

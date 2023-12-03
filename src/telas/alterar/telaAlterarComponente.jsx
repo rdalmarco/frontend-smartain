@@ -75,18 +75,21 @@ function TelaAlterarComponente() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
             value : dadosComponente && dadosComponente.length > 0 ? dadosComponente[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'technicalData',
+            placeholder: 'Descrição Técnica',
             tipoCampo: 'text',
             value : dadosComponente && dadosComponente.length > 0 ? dadosComponente[0].Descrição : '',
         },
         {
             tipo: 'select',
             label: 'modelId',
+            placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
             value : dadosComponente && dadosComponente.length > 0 ? dadosComponente[0].Model : '',
@@ -94,6 +97,7 @@ function TelaAlterarComponente() {
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Maquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
             value : dadosComponente && dadosComponente.length > 0 ? dadosComponente[0].Maquina : '',
@@ -101,6 +105,7 @@ function TelaAlterarComponente() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

@@ -42,21 +42,23 @@ function TelaAlterarUsuario() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
             value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'login',
+            placeholder: 'Login',
             tipoCampo: 'text',
             value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Login : '',
         },
         {
             tipo: 'input',
             label: 'password',
+            placeholder: 'Senha',
             tipoCampo: 'text',
             value: '',
-            //value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Password : '',
         },
         {
             tipo: 'hidden',
@@ -68,12 +70,14 @@ function TelaAlterarUsuario() {
         {
             tipo: 'input',
             label: 'email',
+            placeholder: 'Email',
             tipoCampo: 'text',
             value: dadosUser && dadosUser.length > 0 ? dadosUser[0].Email : '',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

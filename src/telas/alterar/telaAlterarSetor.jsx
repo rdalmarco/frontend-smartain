@@ -61,6 +61,7 @@ function TelaAlterarSetor() {
         {
             tipo: 'select',
             label: 'unitId',
+            placeholder: 'Unidade Fabril',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
             value : dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Unit : '',
             tipoValue: 'int',
@@ -68,24 +69,28 @@ function TelaAlterarSetor() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
             value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'tag',
+            placeholder: 'Tag',
             tipoCampo: 'text',
             value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Tag : '',
         },
         {
             tipo: 'input',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
             value: dadosSetor && dadosSetor.length > 0 ? dadosSetor[0].Description : '',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

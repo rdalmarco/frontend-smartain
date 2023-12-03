@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../css/forms.css'
 import {useNavigate , useParams} from "react-router-dom";
 
-const CampoSelect = ({ label, options, defaultValue, onChange }) => {
+const CampoSelect = ({ label, options, defaultValue, placeholder, onChange }) => {
     const [selectedValue, setSelectedValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -17,9 +17,9 @@ const CampoSelect = ({ label, options, defaultValue, onChange }) => {
 
     return (
         <div>
-            <select onChange={handleChange} placeholder={label} className="formsCadastro" value={selectedValue}>
+            <select onChange={handleChange} placeholder={placeholder} className="formsCadastro" value={selectedValue}>
                 <option value="" disabled selected>
-                    {label}
+                    {placeholder}
                 </option>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>
@@ -31,19 +31,19 @@ const CampoSelect = ({ label, options, defaultValue, onChange }) => {
     );
 };
 
-const CampoInput = ({ label, type, defaultValue, onChange, readOnly }) => {
+const CampoInput = ({ label, type, defaultValue, onChange, placeholder, readOnly }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
 
     return (
         <div>
-            <input type={type} onChange={handleChange} placeholder={label} defaultValue={defaultValue} className="formsCadastro" readOnly={readOnly}/>
+            <input type={type} onChange={handleChange} placeholder={placeholder} defaultValue={defaultValue} className="formsCadastro" readOnly={readOnly}/>
         </div>
     );
 };
 
-const CampoTextarea = ({ label, defaultValue, onChange }) => {
+const CampoTextarea = ({ label, defaultValue, placeholder, onChange }) => {
     const handleChange = (e) => {
         onChange(e.target.value);
     };
@@ -52,7 +52,7 @@ const CampoTextarea = ({ label, defaultValue, onChange }) => {
         <div>
             <textarea
                 onChange={handleChange}
-                placeholder={label}
+                placeholder={placeholder}
                 defaultValue={defaultValue}
                 className="formsCadastro"
             />
@@ -147,6 +147,7 @@ function FormsAlterar({campos, backEndUrl })  {
                             label={campo.label}
                             options={campo.opcoes}
                             defaultValue={campo.value}
+                            placeholder={campo.placeholder}
                             onChange={(valor) => handleChangeCampo(campo.label, valor, campo.tipoValue)}
                         />
                     );
@@ -157,15 +158,32 @@ function FormsAlterar({campos, backEndUrl })  {
                             label={campo.label}
                             type={campo.tipoCampo}
                             defaultValue={campo.value}
+                            placeholder={campo.placeholder}
                             name={campo.label}
                             readOnly={campo.readOnly}
                             onChange={(valor) => handleChangeCampo(campo.label, valor, campo.tipoValue)}
                         />
                     );
 
-                }
-                return null;
-            })}
+                } else if (campo.tipo === 'inputTime' || campo.tipo === 'inputDate') {
+                    return (
+                        <div>
+                            <label htmlFor="">{campo.placeholder}:</label>
+                            <CampoInput
+                                key={index}
+                                label={campo.label}
+                                type={campo.tipoCampo}
+                                defaultValue={campo.defaultValue}
+                                name={campo.label}
+                                onChange={(valor) =>
+                                    handleChangeCampo(campo.label, valor, campo.tipoValue)
+                                }
+                                className="formsCadastro"
+                            />
+                        </div>
+                    );
+                    return null;
+                }})}
             <div className="textareaColumn">
                 {campos
                     .filter((campo) => campo.tipo === 'textarea')
@@ -174,6 +192,7 @@ function FormsAlterar({campos, backEndUrl })  {
                             key={index}
                             label={campo.label}
                             defaultValue={campo.value}
+                            placeholder={campo.placeholder}
                             onChange={(valor) =>
                                 handleChangeCampo(campo.label, valor, campo.tipoValue)
                             }

@@ -11,6 +11,7 @@ function TelaCadastrarOrdem() {
     const [causes, setCauses] = useState([]);
     const [prioritys, setPrioritys] = useState([]);
     const [types, setTypes] = useState([]);
+    const [selectedMachineId, setSelectedMachineId] = useState('');
 
     useEffect(() => {
         fetchMachine();
@@ -18,6 +19,9 @@ function TelaCadastrarOrdem() {
         fetchPriority();
         fetchTypes();
     }, []);
+
+    function conferirGarantia(id) {
+    }
 
     function fetchMachine() {
         fetch(`${backendUrl}/api/mhu/machine`)
@@ -27,7 +31,8 @@ function TelaCadastrarOrdem() {
 
                 const dadosMachine = data.map(item => ({
                     Id: item.id,
-                    Nome: item.tag
+                    Nome: item.tag,
+                    Garantia: item.warrantyExpDate
                 }));
 
                 setMachines(dadosMachine);
@@ -90,7 +95,7 @@ function TelaCadastrarOrdem() {
     const camposFormulario = [
         {
             tipo: 'select',
-            label: 'machineId',
+            label: 'machineIdOrdem',
             placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
@@ -160,7 +165,7 @@ function TelaCadastrarOrdem() {
         <div className="tittleCadastrarOrdem">
             <Highbar/>
             <LayoutCadastro titulo="Ordem de Serviço" valorUrlAdicionar="ordem">
-                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceOrder`} />
+                <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mpp/serviceOrder`} conferirGarantia={conferirGarantia}/>
             </LayoutCadastro>
             <Bottombar/>
         </div>

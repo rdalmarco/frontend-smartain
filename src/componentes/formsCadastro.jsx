@@ -60,7 +60,7 @@ const CampoInput = ({ label, type, defaultValue, onChange, placeholder }) => {
     );
 };
 
-function FormsCadastro({campos, backEndUrl})  {
+function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
     const navigate = useNavigate();
     const [valoresCampos, setValoresCampos] = useState({});
 
@@ -75,6 +75,10 @@ function FormsCadastro({campos, backEndUrl})  {
 
     const handleChangeCampo = (nomeCampo, valorCampo, tipoValue) => {
         let valorConvertido = valorCampo;
+
+        if (nomeCampo === 'machineIdOrdem') {
+            conferirGarantia(valorCampo);
+        }
 
         if (tipoValue === 'int') {
             valorConvertido = parseInt(valorCampo, 10);

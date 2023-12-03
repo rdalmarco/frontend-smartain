@@ -25,7 +25,7 @@ function TelaConsultaModelos() {
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
                     Name: item.model,
-                    Fabricante: item.manufacturer.socialReason,
+                    //Fabricante: item.manufacturer.socialReason,
                     Status: item.status,
                 }));
 

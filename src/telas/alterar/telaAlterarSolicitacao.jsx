@@ -125,6 +125,7 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'select',
             label: 'machineId',
+            placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Machine : '',
@@ -132,6 +133,7 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'hidden',
             label: 'status',
+            placeholder: 'Status',
             tipoCampo: 'text',
             tipoValue: 'int',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Status : '',
@@ -139,12 +141,14 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'textarea',
             label: 'description',
+            placeholder: 'Descrição',
             tipoCampo: 'text',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Description : '',
         },
         {
             tipo: 'select',
             label: 'priorityId',
+            placeholder: 'Prioridade',
             opcoes: prioritys.map(priority => ({ value: priority.Id, label: priority.Nome })),
             tipoValue: 'int',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Priority : '',
@@ -152,6 +156,7 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'select',
             label: 'symptomId',
+            placeholder: 'Sintomas',
             opcoes: symptoms.map(symptom => ({ value: symptom.Id, label: symptom.Nome })),
             tipoValue: 'int',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].Symptom : '',
@@ -159,6 +164,7 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'select',
             label: 'maintenanceTypeId',
+            placeholder: 'Tipo de Manutenção',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             tipoValue: 'int',
             value : dadosSolicitacao && dadosSolicitacao.length > 0 ? dadosSolicitacao[0].MaintenanceType : '',
@@ -166,6 +172,7 @@ function TelaAlterarSolicitacao() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 1, label: 'Aberta' },
                 { value: 2, label: 'Aprovada' },

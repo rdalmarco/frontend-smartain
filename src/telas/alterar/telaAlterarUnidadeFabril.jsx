@@ -8,7 +8,6 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarUnidadeFabril() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
     const [citys, setCitys] = useState([]);
     const [types, setTypes] = useState([]);
     const [dadosUnidade, setDadosUnidade] = useState([]);
@@ -26,7 +25,6 @@ function TelaAlterarUnidadeFabril() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
                     Nome: data.tag,
@@ -37,7 +35,6 @@ function TelaAlterarUnidadeFabril() {
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
                 setDadosUnidade([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -49,14 +46,11 @@ function TelaAlterarUnidadeFabril() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosCity = data.map(item => ({
                     Id: item.id.cityId,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setCitys(dadosCity);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -68,14 +62,11 @@ function TelaAlterarUnidadeFabril() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosType = data.map(item => ({
                     Id: item.id,
                     Nome: item.name
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setTypes(dadosType);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -98,6 +89,7 @@ function TelaAlterarUnidadeFabril() {
         {
             tipo: 'select',
             label: 'cityId',
+            placeholder: 'Cidade',
             opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
             value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
             tipoValue: 'int',
@@ -111,6 +103,7 @@ function TelaAlterarUnidadeFabril() {
         {
             tipo: 'select',
             label: 'typeId',
+            placeholder: 'Tipo',
             opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
             value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
             tipoValue: 'int',
@@ -118,6 +111,7 @@ function TelaAlterarUnidadeFabril() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

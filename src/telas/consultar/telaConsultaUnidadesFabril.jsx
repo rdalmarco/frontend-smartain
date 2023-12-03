@@ -23,16 +23,14 @@ function TelaConsultaUnidadesFabris() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
                     Nome: item.tag,
                     Cidade: item.city.name,
-                    Tipo: item.type.description,
+                    Tipo: item.type.name,
                     Status: item.status,
                 }));
 
-                // Atualiza o estado usando setDadosUnidades
                 setDadosUnidades([dadosFormatados]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));

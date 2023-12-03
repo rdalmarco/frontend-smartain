@@ -77,12 +77,14 @@ function TelaAlterarPlano() {
         {
             tipo: 'input',
             label: 'name',
+            placeholder: 'Nome',
             tipoCampo: 'text',
             value : dadosPlano && dadosPlano.length > 0 ? dadosPlano[0].Nome : '',
         },
         {
             tipo: 'select',
             label: 'unitId',
+            placeholder: 'Unidade',
             opcoes: units.map(unit => ({ value: unit.Id, label: unit.Nome })),
             tipoValue: 'int',
             value : dadosPlano && dadosPlano.length > 0 ? dadosPlano[0].Unidade : '',
@@ -90,6 +92,7 @@ function TelaAlterarPlano() {
         {
             tipo: 'select',
             label: 'userId',
+            placeholder: 'Usuário Responsável',
             opcoes: users.map(user => ({ value: user.Id, label: user.Nome })),
             tipoValue: 'int',
             value : dadosPlano && dadosPlano.length > 0 ? dadosPlano[0].Usuario : '',
@@ -97,6 +100,7 @@ function TelaAlterarPlano() {
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 1, label: 'Não Iniciado' },
                 { value: 2, label: 'Em Progresso' },

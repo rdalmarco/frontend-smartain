@@ -14,7 +14,7 @@ function TelaAlterarModelo() {
     const { id } = useParams();
 
     useEffect(() => {
-        fetchModelType();
+        //fetchModelType();
         fetchManufacturer();
         fetchValues();
     }, []);
@@ -59,14 +59,14 @@ function TelaAlterarModelo() {
 
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Manufacturer: data.manufacturer.id,
+                    //Manufacturer: data.manufacturer.id,
                     Model: data.model,
                     Dimensions: data.dimensions,
                     Tipo: data.domainType,
                     Status: data.Status,
                 };
 
-                console.log('XZ', dadosFormatadosAlterar)
+                console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', dadosFormatadosAlterar)
                 setDadosModelo([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -76,6 +76,7 @@ function TelaAlterarModelo() {
         {
             tipo: 'select',
             label: 'manufacturerId',
+            placeholder: 'Fabricante',
             opcoes: manufactures.map(manufacturer => ({ value: manufacturer.Id, label: manufacturer.Nome })),
             value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].Manufacturer : '',
             tipoValue: 'int',
@@ -83,29 +84,38 @@ function TelaAlterarModelo() {
         {
             tipo: 'input',
             label: 'model',
+            placeholder: 'Modelo',
             tipoCampo: 'text',
             value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].Model : '',
         },
         {
             tipo: 'input',
             label: 'dimensions',
+            placeholder: 'Dimensões',
             tipoCampo: 'text',
             value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].Dimensions : '',
         },
         {
             tipo: 'select',
             label: 'domainType',
+            placeholder: 'Tipo',
             opcoes: [
                 { value: 1, label: 'Maquina' },
                 { value: 2, label: 'Equipamento' },
                 { value: 3, label: 'Componente' }
             ],
-            value : dadosModelo && dadosModelo.length > 0 ? dadosModelo[0].Tipo : '',
+            value: dadosModelo && dadosModelo.length > 0
+                ? (dadosModelo[0].Tipo === 'MACHINE' ? 1
+                    : dadosModelo[0].Tipo === 'COMPONENT' ? 2
+                        : dadosModelo[0].Tipo === 'EQUIPAMENT' ? 3
+                                : null)
+                : null,
             tipoValue: 'int',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             tipoCampo: 'text',
             opcoes: [
                 { value: 0, label: 'Ativo' },

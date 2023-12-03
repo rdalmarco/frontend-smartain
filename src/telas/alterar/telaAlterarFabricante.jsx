@@ -20,7 +20,6 @@ function TelaAlterarFabricante() {
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
                     Nome: data.socialReason,
@@ -40,30 +39,35 @@ function TelaAlterarFabricante() {
         {
             tipo: 'input',
             label: 'socialReason',
+            placeholder: 'Razão Social',
             tipoCampo: 'text',
             value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Nome : '',
         },
         {
             tipo: 'input',
             label: 'cnpj',
+            placeholder: 'CNPJ',
             tipoCampo: 'text',
             value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].CNPJ : '',
         },
         {
             tipo: 'input',
             label: 'phone',
+            placeholder: 'Telefone',
             tipoCampo: 'text',
             value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Phone : '',
         },
         {
             tipo: 'input',
             label: 'email',
+            placeholder: 'Email',
             tipoCampo: 'text',
             value: dadosFabricante && dadosFabricante.length > 0 ? dadosFabricante[0].Email : '',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
                 { value: 0, label: 'Ativo' },
                 { value: 1, label: 'Inativo' }

@@ -31,7 +31,7 @@ function TelaCadastrarMaquina() {
     }
 
     function fetchModel() {
-        fetch(`${backendUrl}/api/mhu/machineModel`)
+        fetch(`${backendUrl}/api/mhu/model`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
@@ -68,7 +68,7 @@ function TelaCadastrarMaquina() {
         },
         {
             tipo: 'select',
-            label: 'machineModelId',
+            label: 'modelId',
             placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
