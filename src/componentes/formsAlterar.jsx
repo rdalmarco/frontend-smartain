@@ -106,6 +106,14 @@ function FormsAlterar({campos, backEndUrl })  {
         }
     };
 
+    function limparCampos() {
+        const initialFieldValues = {};
+        campos.forEach(campo => {
+            initialFieldValues[campo.label] = campo.defaultValue || '';
+        });
+        setValoresCampos(initialFieldValues);
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         console.log('Valores enviados ao backend: ', valoresCampos)
@@ -126,14 +134,15 @@ function FormsAlterar({campos, backEndUrl })  {
 
             });
 
-
-            console.log('Resposta da requisição:', response);
-            window.alert('Alterado com sucesso!');
-            navigate(-1)
-
-
+            if (!response.ok) {
+                throw new Error(`Erro ao enviar os dados. ${response.statusText}`)
+            } else {
+                window.alert('Alterado com sucesso!');
+                limparCampos();
+                navigate(-1);
+            }
         } catch (error) {
-            console.error('Erro ao enviar para o backend:', error);
+            alert(error.message);
         }
     };
 

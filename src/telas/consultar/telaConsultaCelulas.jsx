@@ -21,7 +21,7 @@ function TelaConsultaCelulas() {
     fetch(`${backendUrl}/api/mhu/productionCell`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Erro ao consultar os dados. ${response.statusText}`);
+          throw new Error(`Erro ao consultar os dados de células. ${response.statusText}`);
         }
         return response.json();
       })

@@ -15,9 +15,14 @@ function TelaCadastrarCelula() {
 
     function fetchSector() {
         fetch(`${backendUrl}/api/mhu/sector`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao consultar os dados de setores. ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Dados recebidos do backend:", data);
 
                 const dadosSector = data.map(item => ({
                     Id: item.id,
@@ -26,7 +31,9 @@ function TelaCadastrarCelula() {
 
                 setSectors(dadosSector);
             })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
+            .catch((error) => {
+                alert(error.message);
+            });
     }
 
     const camposFormulario = [

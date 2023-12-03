@@ -61,7 +61,7 @@ const CampoInput = ({ label, type, defaultValue, onChange, placeholder }) => {
     );
 };
 
-function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
+function FormsCadastro({campos, backEndUrl, conferirGarantia = null})  {
     const navigate = useNavigate();
     const [valoresCampos, setValoresCampos] = useState({});
 
@@ -88,34 +88,46 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
                 ...prevState,
                 [nomeCampo]: valorConvertido
             }));
-            console.log('Valores setados', valoresCampos);
+
         } catch (error) {
             console.error('Erro ao conferir garantia:', error);
         }
     }
 
+    function limparCampos() {
+        const initialFieldValues = {};
+        campos.forEach(campo => {
+            initialFieldValues[campo.label] = campo.defaultValue || '';
+        });
+        setValoresCampos(initialFieldValues);
+    }
+
     const handleSubmit = async () => {
-
-        if (conferirGarantia !== null) {
-            await conferirGarantia(valoresCampos['machineId']);
-        }
-
-        console.log('Valores enviados ao backend: ', valoresCampos)
-        console.log('Valores JSON', JSON.stringify(valoresCampos))
         try {
-            const response = await fetch(backEndUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(valoresCampos),
-            });
 
-            console.log('Resposta da requisição:', response);
-            navigate(-1)
+            if (conferirGarantia !== null) {
+                await conferirGarantia(valoresCampos['machineId']);
+            }
 
+            console.log('Valores enviados ao backend: ', valoresCampos)
+            console.log('Valores JSON', JSON.stringify(valoresCampos))
+
+                const response = await fetch(backEndUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(valoresCampos),
+                });
+
+            if (!response.ok) {
+                throw new Error(`Erro ao enviar os dados. ${response.statusText}`)
+            } else {
+                limparCampos();
+                navigate(-1);
+            }
         } catch (error) {
-            console.error('Erro ao enviar para o backend:', error);
+            alert(error.message);
         }
     };
 
