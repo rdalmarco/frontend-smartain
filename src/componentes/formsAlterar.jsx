@@ -173,7 +173,7 @@ function FormsAlterar({campos, backEndUrl })  {
                                 key={index}
                                 label={campo.label}
                                 type={campo.tipoCampo}
-                                defaultValue={campo.defaultValue}
+                                defaultValue={campo.value}
                                 name={campo.label}
                                 onChange={(valor) =>
                                     handleChangeCampo(campo.label, valor, campo.tipoValue)

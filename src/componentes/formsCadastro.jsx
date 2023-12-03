@@ -73,20 +73,21 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
         setValoresCampos(initialFieldValues);
     }, [campos]);
 
-    const handleChangeCampo = (nomeCampo, valorCampo, tipoValue) => {
+    const handleChangeCampo = async (nomeCampo, valorCampo, tipoValue) => {
         let valorConvertido = valorCampo;
 
-        if (nomeCampo === 'machineIdOrdem') {
-            conferirGarantia(valorCampo);
-        }
+        try {
+            if (tipoValue === 'int') {
+                valorConvertido = parseInt(valorCampo, 10);
+            } else if (tipoValue === 'float') {
+                valorConvertido = parseFloat(valorCampo);
+            }
 
-        if (tipoValue === 'int') {
-            valorConvertido = parseInt(valorCampo, 10);
-        } else if (tipoValue === 'float') {
-            valorConvertido = parseFloat(valorCampo);
-        }
+            setValoresCampos({...valoresCampos, [nomeCampo]: valorConvertido});
 
-        setValoresCampos({ ...valoresCampos, [nomeCampo]: valorConvertido });
+        } catch (error) {
+            console.error('Erro ao conferir garantia:', error);
+        }
     };
 
     const handleSubmit = async () => {
@@ -121,7 +122,7 @@ function FormsCadastro({campos, backEndUrl, conferirGarantia })  {
                                     key={index}
                                     label={campo.label}
                                     options={campo.opcoes}
-                                    defaultValue={campo.defaultValue}
+                                    defaultValue={campo.value}
                                     placeholder={campo.placeholder}
                                     onChange={(valor) =>
                                         handleChangeCampo(campo.label, valor, campo.tipoValue)

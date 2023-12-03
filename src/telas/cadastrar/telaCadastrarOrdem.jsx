@@ -8,10 +8,10 @@ import { useLocation } from "react-router-dom";
 function TelaCadastrarOrdem() {
     const backendUrl = 'http://localhost:8090'
     const [machines, setMachines] = useState([]);
+    const [garantiaData, setGarantiaData] = useState('');
     const [causes, setCauses] = useState([]);
     const [prioritys, setPrioritys] = useState([]);
     const [types, setTypes] = useState([]);
-    const [selectedMachineId, setSelectedMachineId] = useState('');
 
     useEffect(() => {
         fetchMachine();
@@ -20,7 +20,39 @@ function TelaCadastrarOrdem() {
         fetchTypes();
     }, []);
 
+    useEffect(() => {
+        console.log('Garantia recebida:', garantiaData);
+        if (garantiaData) {
+            const garantiaDate = new Date(garantiaData);
+            const now = new Date();
+
+            if (garantiaDate >= now) {
+                alert('A máquina está em período de garantia. Tenha atenção com os serviços executados');
+            } else {
+                console.log('Teste do Else');
+            }
+        }
+    }, [garantiaData]);
+
     function conferirGarantia(id) {
+            fetchMachineId(id)
+    }
+
+    function fetchMachineId(id) {
+        fetch(`${backendUrl}/api/mhu/machine/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosMachineGarantia = [{
+                    Id: data.id,
+                    Garantia: data.warrantyExpDate
+                }];
+
+                console.log('Dados da maquina para conferir garantia', dadosMachineGarantia)
+                setGarantiaData(dadosMachineGarantia[0].Garantia);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     function fetchMachine() {
@@ -34,7 +66,6 @@ function TelaCadastrarOrdem() {
                     Nome: item.tag,
                     Garantia: item.warrantyExpDate
                 }));
-
                 setMachines(dadosMachine);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -90,16 +121,15 @@ function TelaCadastrarOrdem() {
 
     const location = useLocation();
     const dadosOrdem = location.state && location.state.dadosOrdem;
-    console.log(dadosOrdem)
 
     const camposFormulario = [
         {
             tipo: 'select',
-            label: 'machineIdOrdem',
+            label: 'machineId',
             placeholder: 'Máquina',
             opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
-            defaultValue: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : ''
+            value: dadosOrdem && dadosOrdem.Maquina ? dadosOrdem.Maquina : ''
         },
         {
             tipo: 'hidden',

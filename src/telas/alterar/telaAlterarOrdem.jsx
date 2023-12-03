@@ -16,18 +16,18 @@ function TelaAlterarOrdem() {
     const { id } = useParams();
 
     useEffect(() => {
-        fetchValues();
         fetchMachine();
         fetchCause();
         fetchPriority();
         fetchTypes();
+        fetchValues();
     }, []);
 
     function fetchValues() {
         fetch(`${backendUrl}/api/mpp/serviceOrder/${id}`)
             .then(response => response.json())
             .then(data => {
-                console.log('Dados recebidos do backend:', data);
+                console.log('Dados recebidos do backend Values:', data);
 
                 const dadosFormatadosAlterar = {
                     Id: data.id,
@@ -36,8 +36,8 @@ function TelaAlterarOrdem() {
                     UsuarioAbertura: data.openingUser.name,
                     TipoManutencao: data.maintenanceType.id,
                     TempoEstimado: data.estimatedDuration,
-                    Causa: data.serviceCause.id,
-                    Solicitacao: data.serviceSolicitation.id,
+                    Causa: data.serviceCause ? data.serviceCause.id : null,
+                    Solicitacao: data.serviceSolicitation ? data.serviceSolicitation.id : null,
                     Status: data.status,
                 };
 
@@ -123,6 +123,7 @@ function TelaAlterarOrdem() {
         {
             tipo: 'input',
             label: 'Nome Usuario Responsável',
+            placeholder: 'Usuário Responsável',
             tipoCampo: 'text',
             tipoValue: 'int',
             value : dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].UsuarioAbertura : '',
@@ -171,8 +172,10 @@ function TelaAlterarOrdem() {
             label: 'solicitationId',
             placeholder: 'Solicitação',
             opcoes: dadosOrdem && dadosOrdem.length > 0
-                ? [{ value: dadosOrdem[0].Solicitacao, label: dadosOrdem[0].Solicitacao }]
-                : [{ value: 0, label: 'Ordem gerada manualmente'}],
+                ? (dadosOrdem[0].Solicitacao
+                    ? [{ value: dadosOrdem[0].Solicitacao, label: dadosOrdem[0].Solicitacao }]
+                    : [{ value: 0, label: 'Sem Ordem' }])
+                : [{ value: 0, label: 'Sem Ordem' }],
             tipoValue: 'int',
             value: dadosOrdem && dadosOrdem.length > 0 ? dadosOrdem[0].Solicitacao : '0'
         },
