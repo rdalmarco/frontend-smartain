@@ -8,7 +8,7 @@ function Highbar() {
     const [menuOpen, setMenuOpen] = useState(null);
 
     const handleItemClick = (item) => {
-        if (activeItem === item) {
+        if (activeItem == item) {
             setActiveItem(null);
             setMenuOpen(false);
         } else {
@@ -39,7 +39,6 @@ function Highbar() {
                             <li> <Link to="/cadastros/plano">Plano</Link></li>
                             <li> <Link to="/cadastros/alerta">Alerta</Link></li>
                             <li> <Link to="/cadastros/usuario">Usuário</Link></li>
-
                         </ul>
                     )}
                 </li>

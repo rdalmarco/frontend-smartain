@@ -6,7 +6,6 @@ import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaCelulas() {
   const backendUrl = "http://localhost:8090";
-
   const [dadosCelulas, setDadosCelulas] = useState([]);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function TelaConsultaCelulas() {
           Id: item.id,
           Name: item.name,
           Description: item.description,
-          Status: item.status,
+          Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
         }));
 
         setDadosCelulas([dadosFormatados]);
@@ -45,11 +44,11 @@ function TelaConsultaCelulas() {
   return (
     <div className="">
       <Highbar />
-      <LayoutConsulta
-        titulo="Células"
-        valorUrlAdicionar="celula"
-        dados={dadosCelulas}
-      />
+          <LayoutConsulta
+            titulo="Células"
+            valorUrlAdicionar="celula"
+            dados={dadosCelulas}
+          />
       <Bottombar />
     </div>
   );
