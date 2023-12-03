@@ -8,10 +8,8 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarCelula() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
     const [dadosCelula, setDadosCelula] = useState([]);
     const [sectors, setSectors] = useState([]);
-
     const { id } = useParams();
 
     useEffect(() => {
@@ -20,13 +18,11 @@ function TelaAlterarCelula() {
     }, []);
 
     function fetchValues() {
-
         fetch(`${backendUrl}/api/mhu/productionCell/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
                     Nome: data.name,
@@ -37,7 +33,7 @@ function TelaAlterarCelula() {
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
+
                 setDadosCelula([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
@@ -54,7 +50,6 @@ function TelaAlterarCelula() {
                     Nome: item.name,
                 }));
 
-                // Atualiza o estado usando setDadosSetor
                 setSectors(dadosSector);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
