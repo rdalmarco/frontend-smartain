@@ -88,7 +88,7 @@ function TelaAlterarComponente() {
         },
         {
             tipo: 'select',
-            label: 'modelId',
+            label: 'componentModelId',
             placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
@@ -107,10 +107,10 @@ function TelaAlterarComponente() {
             label: 'status',
             placeholder: 'Status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Ativo' },
+                { value: 2, label: 'Inativo' }
             ],
-            value: dadosComponente && dadosComponente.length > 0 && dadosComponente[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosComponente && dadosComponente.length > 0 && dadosComponente[0].Status === 'ACTIVE' ? 1 : 2,
             tipoValue: 'int',
         },
     ];

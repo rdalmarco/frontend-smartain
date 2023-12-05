@@ -29,8 +29,8 @@ function TelaAlterarEquipamento() {
                     Id: data.id,
                     Nome: data.name,
                     Descrição: data.technicalData,
-                    Model : data.model.model,
-                    Maquina : data.machine.tag,
+                    Model : data.model.id,
+                    Maquina : data.machine.id,
                     Status: data.status,
                 };
 
@@ -88,7 +88,7 @@ function TelaAlterarEquipamento() {
         },
         {
             tipo: 'select',
-            label: 'modelId',
+            label: 'equipmentModelId',
             placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
@@ -107,10 +107,10 @@ function TelaAlterarEquipamento() {
             label: 'status',
             placeholder: 'Status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Ativo' },
+                { value: 2, label: 'Inativo' }
             ],
-            value: dadosEquipamento && dadosEquipamento.length > 0 && dadosEquipamento[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosEquipamento && dadosEquipamento.length > 0 && dadosEquipamento[0].Status === 'ACTIVE' ? 1 : 2,
             tipoValue: 'int',
         },
     ];
