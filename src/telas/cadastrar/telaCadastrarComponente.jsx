@@ -31,7 +31,7 @@ function TelaCadastrarComponente() {
     }
 
     function fetchModel() {
-        fetch(`${backendUrl}/api/mhu/model`)
+        fetch(`${backendUrl}/api/mhu/model?type=component`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);

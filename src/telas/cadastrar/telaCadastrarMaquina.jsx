@@ -31,7 +31,7 @@ function TelaCadastrarMaquina() {
     }
 
     function fetchModel() {
-        fetch(`${backendUrl}/api/mhu/model`)
+        fetch(`${backendUrl}/api/mhu/model?type=machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
