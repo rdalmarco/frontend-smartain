@@ -17,7 +17,7 @@ function TelaConsultaEquipamentos() {
     }, [dadosComponentes]);
 
     function fetchDataFromBackend() {
-        fetch(`${backendUrl}/api/mhu/equipment`)
+        fetch(`${backendUrl}/api/mhu/component`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);

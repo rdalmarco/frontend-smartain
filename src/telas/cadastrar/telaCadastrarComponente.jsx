@@ -38,7 +38,7 @@ function TelaCadastrarComponente() {
 
                 const dadosModel = data.map(item => ({
                     Id: item.id,
-                    Nome: item.name
+                    Nome: item.model
                 }));
                 setModels(dadosModel);
             })
@@ -60,7 +60,7 @@ function TelaCadastrarComponente() {
         },
         {
             tipo: 'select',
-            label: 'modelId',
+            label: 'componentModelId',
             placeholder: 'Modelo',
             opcoes: models.map(model => ({ value: model.Id, label: model.Nome })),
             tipoValue: 'int',
@@ -76,7 +76,7 @@ function TelaCadastrarComponente() {
             tipo: 'hidden',
             label: 'status',
             tipoCampo: 'text',
-            defaultValue: 'ACTIVE',
+            defaultValue: '1',
         },
     ];
 
