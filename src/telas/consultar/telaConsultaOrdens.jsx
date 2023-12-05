@@ -16,11 +16,24 @@ function TelaConsultaOrdens() {
         console.log('Dados atualizados:', dadosOrdens);
     }, [dadosOrdens]);
 
+
     function fetchDataFromBackend() {
         fetch(`${backendUrl}/api/mpp/serviceOrder`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
+
+                function getStatus(status) {
+                    if(status === 'NOT_STARTED') {
+                        return "Não iniciada";
+                    } else if (status === 'SUSPENDED') {
+                        return "Suspensa";
+                    } else if (status === 'IN_PROGRESS') {
+                        return "Em progresso";
+                    } else if (status === 'COMPLETED') {
+                        return "Concluída";
+                    }
+                }
 
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
@@ -28,7 +41,7 @@ function TelaConsultaOrdens() {
                     Abertura: item.openingDate,
                     Prioridade: item.priority.descritpion,
                     Usuario: item.openingUser.name,
-                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
+                    Status: getStatus(item.status),
                 }));
 
                 setDadosOrdens([dadosFormatados]);

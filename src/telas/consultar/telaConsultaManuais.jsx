@@ -27,7 +27,7 @@ function TelaConsultaManuais() {
                     Maquina: item.machine.id,
                     Titulo: item.title,
                     Descricao: item.description,
-                    Status: item.status
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosManuais([dadosFormatados]);

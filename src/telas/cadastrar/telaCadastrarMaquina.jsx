@@ -97,7 +97,7 @@ function TelaCadastrarMaquina() {
     return (
         <div className="tittleCadastrarMaquina">
             <Highbar/>
-            <LayoutCadastro titulo="Maquina" valorUrlAdicionar="maquina">
+            <LayoutCadastro titulo="Máquina" valorUrlAdicionar="maquina">
                 <FormsCadastro campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/machine`} />
             </LayoutCadastro>
             <Bottombar/>

@@ -28,7 +28,7 @@ function TelaConsultaAlertas() {
                     Plano: item.plan ? item.plan.name : 'Alerta para máquina',
                     Titulo: item.title,
                     Descricao: item.description,
-                    Status: item.status
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosAlertas([dadosFormatados]);
