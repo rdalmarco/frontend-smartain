@@ -89,6 +89,18 @@ function TelaRelatoriosGerais() {
             .then(data => {
                 console.log('Dados recebidos do backend Values:', data);
 
+                function getStatus(status) {
+                    if(status === 'NOT_STARTED') {
+                        return "Não iniciada";
+                    } else if (status === 'SUSPENDED') {
+                        return "Suspensa";
+                    } else if (status === 'IN_PROGRESS') {
+                        return "Em progresso";
+                    } else if (status === 'COMPLETED') {
+                        return "Concluída";
+                    }
+                }
+
                 const dadosOrdens = data.map(item => ({
                     Id: item.id,
                     Unidade: item.unit.tag,
@@ -97,7 +109,7 @@ function TelaRelatoriosGerais() {
                     Prioridade: item.priority.descritpion,
                     Tipo: item.maintenanceType.descritpion,
                     Estimado: item.estimatedDuration,
-                    Status: item.status,
+                    Status: getStatus(item.status),
                 }));
 
                 setDadosJSON(dadosOrdens);
