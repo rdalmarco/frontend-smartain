@@ -59,6 +59,9 @@ import TelaAlterarOrdem from "../telas/alterar/telaAlterarOrdem";
 import TelaConsultaSolicitacao from "../telas/consultar/telaConsultaSolicitacao";
 import TelaCadastrarSolicitacao from "../telas/cadastrar/telaCadastrarSolicitacao";
 import TelaAlterarSolicitacao from "../telas/alterar/telaAlterarSolicitacao";
+import TelaRelatorios from "../telas/relatorios/TelaRelatoriosGerais";
+import TelaRelatorioMaquinas from "../telas/relatorios/TelaRelatoriosGerais";
+import TelaRelatoriosGerais from "../telas/relatorios/TelaRelatoriosGerais";
 
 
 function TarefasApp() {
@@ -126,6 +129,8 @@ function TarefasApp() {
                     <Route path='/cadastros/solicitacao' element={<TelaConsultaSolicitacao />} />
                     <Route path='/cadastros/solicitacao/cadastrar' element={<TelaCadastrarSolicitacao />} />
                     <Route path='/cadastros/solicitacao/alterar/:id' element={<TelaAlterarSolicitacao />} />
+
+                    <Route path='/indicadores/relatorios/gerais' element={<TelaRelatoriosGerais />} />
                 </Routes>
             </BrowserRouter>
     )}

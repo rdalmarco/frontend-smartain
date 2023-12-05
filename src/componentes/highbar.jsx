@@ -61,12 +61,11 @@ function Highbar() {
                         </ul>
                     )}
                 </li>
-                <li className="navbar-item" onClick={() => handleItemClick('indicadores')}>
-                    <a href="#" className="navbar-link">Indicadores</a>
-                    {activeItem === 'indicadores' && (
+                <li className="navbar-item" onClick={() => handleItemClick('relatorios')}>
+                    <a href="#" className="navbar-link">Relatórios</a>
+                    {activeItem === 'relatorios' && (
                         <ul className="sub-menu">
-                            <li><Link to="/indicadores/metas">Metas</Link></li>
-                            <li><Link to="/indicadores/relatorios">Relatórios</Link></li>
+                            <li><Link to="/indicadores/relatorios/gerais">Gerais</Link></li>
                         </ul>
                     )}
                 </li>

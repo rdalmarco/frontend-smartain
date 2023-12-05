@@ -64,7 +64,7 @@ function TelaCadastrarAlerta() {
             tipoCampo: 'text',
         },
         {
-            tipo: 'input',
+            tipo: 'textarea',
             label: 'description',
             placeholder: 'Descrição do Alerta',
             tipoCampo: 'text',
@@ -84,7 +84,7 @@ function TelaCadastrarAlerta() {
         },
         {
             tipo: 'select',
-            label: 'plan',
+            label: 'planId',
             placeholder: 'Plano de Manutenção',
             opcoes: plans.map(plan => ({ value: plan.Id, label: plan.Nome })),
             tipoValue: 'int',

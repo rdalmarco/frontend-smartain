@@ -1,0 +1,24 @@
+.tittleRelatorio {
+    color: white;
+    margin: 10px;
+    margin-top: 0;
+    position: absolute;
+    top: 3%;
+    left: 1%;
+}
+
+.containerRelatorio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333333;
+    height: 70vh;
+    width: 70%;
+    margin: auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

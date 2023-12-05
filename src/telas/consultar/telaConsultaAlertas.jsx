@@ -24,9 +24,11 @@ function TelaConsultaAlertas() {
 
                 const dadosFormatados = data.map(item => ({
                     Id: item.id,
-                    Tipo: item.type === 'ALERT_BY_WARRANTY' ? 'Garantia' : 'Plano de Manutenção',
+                    Maquina: item.machine ? item.machine.tag : 'Alerta para plano',
+                    Plano: item.plan ? item.plan.name : 'Alerta para máquina',
                     Titulo: item.title,
-                    Status: item.status === 'PENDING' ? 'Pendente' : 'Atendido'
+                    Descricao: item.description,
+                    Status: item.status
                 }));
 
                 setDadosAlertas([dadosFormatados]);
