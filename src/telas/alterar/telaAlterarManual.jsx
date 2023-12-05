@@ -8,121 +8,82 @@ import {useParams} from "react-router-dom";
 
 function TelaAlterarManual() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [machines, setMachines] = useState([]);
+    const [dadosManual, setDadosManual] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchMachine();
     }, []);
 
-    function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
+                const dadosMachine = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.tag,
+                }));
+                setMachines(dadosMachine);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
+
+    function fetchValues() {
+        fetch(`${backendUrl}/api/mhu/machineManual/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
+                    Titulo: data.title,
+                    Maquina: data.machine.id,
+                    Descricao: data.description,
                     Status: data.status,
-                    Address: data.address,
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
-                    Id: item.id,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+                setDadosManual([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
-            tipoCampo: 'text',
-            value: 1,
+            tipo: 'select',
+            label: 'machineId',
+            placeholder: 'Máquina',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
             tipoValue: 'int',
+            value: dadosManual && dadosManual.length > 0 ? dadosManual[0].Maquina : '',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'title',
+            placeholder: 'Titulo',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+            value: dadosManual && dadosManual.length > 0 ? dadosManual[0].Titulo : '',
         },
         {
-            tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
-            tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
+            tipo: 'textarea',
+            label: 'description',
+            placeholder: 'Descrição do Manual',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
-        },
-        {
-            tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
-            tipoValue: 'int',
+            value: dadosManual && dadosManual.length > 0 ? dadosManual[0].Descricao : '',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Ativo' },
+                { value: 2, label: 'Inativo' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosManual && dadosManual.length > 0 && dadosManual[0].Status === 'ACTIVE' ? 1 : 2,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +92,7 @@ function TelaAlterarManual() {
         <div className="tittleAlterarManual">
             <Highbar/>
             <LayoutCadastro titulo="Manual" valorUrlAdicionar="manual">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/machineManual`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>

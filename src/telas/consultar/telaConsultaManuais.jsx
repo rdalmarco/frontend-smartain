@@ -1,27 +1,44 @@
 import {Link} from "react-router-dom";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaManuais() {
-    //Aqui será recebido os dados do backend
-    const dados = [
-        [
-            { Nome: 'Manual 1', Máquina: 'CNC 1',  Status:'Ativo'},
-            { Nome: 'Manual 2', Máquina: 'CNC 2',  Status:'Ativo'},
-            { Nome: 'Manual 3', Máquina: 'CNC 3',  Status:'Ativo'},
-            { Nome: 'Manual 4', Máquina: 'CNC 4',  Status:'Ativo'},
-            { Nome: 'Manual 5', Máquina: 'CNC 5',  Status:'Ativo'},
-            { Nome: 'Manual 6', Máquina: 'CNC 6',  Status:'Ativo'},
-            { Nome: 'Manual 7', Máquina: 'CNC 7',  Status:'Ativo'},
-        ],
-    ];
+    const backendUrl = 'http://localhost:8090'
+    const [dadosManuais, setDadosManuais] = useState([]);
+
+    useEffect(() => {
+        fetchDataFromBackend();
+    }, []);
+
+    useEffect(() => {
+        console.log('Dados atualizados:', dadosManuais);
+    }, [dadosManuais]);
+
+    function fetchDataFromBackend() {
+        fetch(`${backendUrl}/api/mhu/machineManual`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosFormatados = data.map(item => ({
+                    Id: item.id,
+                    Maquina: item.machine.id,
+                    Titulo: item.title,
+                    Descricao: item.description,
+                    Status: item.status
+                }));
+
+                setDadosManuais([dadosFormatados]);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Manuais" valorUrlAdicionar="manual" dados={dados}/>
+            <LayoutConsulta titulo="Manuais" valorUrlAdicionar="manual" dados={dadosManuais}/>
             <Bottombar/>
         </div>
     );
