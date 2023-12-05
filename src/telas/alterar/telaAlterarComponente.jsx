@@ -64,7 +64,7 @@ function TelaAlterarComponente() {
 
                 const dadosModel = data.map(item => ({
                     Id: item.id,
-                    Nome: item.name
+                    Nome: item.model
                 }));
                 setModels(dadosModel);
             })
