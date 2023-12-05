@@ -26,7 +26,7 @@ function TelaConsultaSetores() {
                     Id: item.id,
                     Nome: item.name,
                     Tipo: item.description,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosSetores([dadosFormatados]);

@@ -23,7 +23,7 @@ function TelaConsultaFabricantes() {
                     Id: item.id,
                     Nome: item.socialReason,
                     CNPJ: item.cnpj,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 // Atualiza o estado usando setDadosUnidades

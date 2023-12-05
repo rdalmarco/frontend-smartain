@@ -30,7 +30,7 @@ function Highbar() {
                             <li> <Link to="/cadastros/celula">Célula</Link></li>
                             <li> <Link to="/cadastros/fabricante">Fabricante</Link></li>
                             <li> <Link to="/cadastros/modelo">Modelo</Link></li>
-                            <li> <Link to="/cadastros/maquina">Maquina</Link></li>
+                            <li> <Link to="/cadastros/maquina">Máquina</Link></li>
                             <li> <Link to="/cadastros/equipamento">Equipamento</Link></li>
                             <li> <Link to="/cadastros/componente">Componente</Link></li>
                             <li> <Link to="/cadastros/manual">Manual</Link></li>
@@ -66,7 +66,7 @@ function Highbar() {
                     {activeItem === 'indicadores' && (
                         <ul className="sub-menu">
                             <li><Link to="/indicadores/metas">Metas</Link></li>
-                            <li><Link to="/indicadores/relatorios">Relatorios</Link></li>
+                            <li><Link to="/indicadores/relatorios">Relatórios</Link></li>
                         </ul>
                     )}
                 </li>

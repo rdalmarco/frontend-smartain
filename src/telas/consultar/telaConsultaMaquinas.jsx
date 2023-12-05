@@ -26,7 +26,7 @@ function TelaConsultaMaquinas() {
                     Id: item.id,
                     Tag: item.tag,
                     //Modelo: item.machineModel.model,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosMaquinas([dadosFormatados]);
@@ -37,7 +37,7 @@ function TelaConsultaMaquinas() {
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Maquinas" valorUrlAdicionar="maquina" dados={dadosMaquinas}/>
+            <LayoutConsulta titulo="Máquinas" valorUrlAdicionar="maquina" dados={dadosMaquinas}/>
             <Bottombar/>
         </div>
     );

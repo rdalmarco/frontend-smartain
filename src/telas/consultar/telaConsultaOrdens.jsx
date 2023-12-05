@@ -28,7 +28,7 @@ function TelaConsultaOrdens() {
                     Abertura: item.openingDate,
                     Prioridade: item.priority.descritpion,
                     Usuario: item.openingUser.name,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosOrdens([dadosFormatados]);

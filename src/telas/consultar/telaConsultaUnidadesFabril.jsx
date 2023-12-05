@@ -28,7 +28,7 @@ function TelaConsultaUnidadesFabris() {
                     Nome: item.tag,
                     Cidade: item.city.name,
                     Tipo: item.type.name,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosUnidades([dadosFormatados]);
@@ -39,7 +39,7 @@ function TelaConsultaUnidadesFabris() {
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Unidades Fabril" valorUrlAdicionar="unidadefabril" dados={dadosUnidades}/>
+            <LayoutConsulta titulo="Unidades Fabris" valorUrlAdicionar="unidadefabril" dados={dadosUnidades}/>
             <Bottombar/>
         </div>
     );

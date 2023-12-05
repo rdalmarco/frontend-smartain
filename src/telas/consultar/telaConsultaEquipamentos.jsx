@@ -26,7 +26,7 @@ function TelaConsultaEquipamentos() {
                     Id: item.id,
                     Nome: item.name,
                     Descrição: item.technicalData,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosEquipamentos([dadosFormatados]);

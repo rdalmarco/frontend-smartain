@@ -26,7 +26,7 @@ function TelaConsultaModelos() {
                     Id: item.id,
                     Name: item.model,
                     //Fabricante: item.manufacturer.socialReason,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosModelos([dadosFormatados]);

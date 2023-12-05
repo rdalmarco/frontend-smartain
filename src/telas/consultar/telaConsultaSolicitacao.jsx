@@ -28,7 +28,7 @@ function TelaConsultaSolicitacao() {
                     Prioridade: item.priority.descritpion,
                     Abertura: item.openingDate,
                     Usuario: item.responsibleProfessional.name,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosSolicitacao([dadosFormatados]);
@@ -39,7 +39,7 @@ function TelaConsultaSolicitacao() {
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Solicitacao de Serviço" valorUrlAdicionar="solicitacao" dados={dadosSolicitacao}/>
+            <LayoutConsulta titulo="Solicitações de Serviço" valorUrlAdicionar="solicitacao" dados={dadosSolicitacao}/>
             <Bottombar/>
         </div>
     );

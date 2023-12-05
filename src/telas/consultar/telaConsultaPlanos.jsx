@@ -28,7 +28,7 @@ function TelaConsultaPlanos() {
                     Unidade: item.unit.tag,
                     Usuario: item.user.name,
                     Abertura: item.createdDate,
-                    Status: item.status,
+                    Status: item.status === 'ACTIVE' ? 'Ativo' : 'Inativo'
                 }));
 
                 setDadosPlanos([dadosFormatados]);
