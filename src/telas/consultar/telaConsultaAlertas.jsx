@@ -1,27 +1,43 @@
 import {Link} from "react-router-dom";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import LayoutConsulta from "../../componentes/layoutConsulta";
 
 function TelaConsultaAlertas() {
-    //Aqui será recebido os dados do backend
-    const dados = [
-        [
-            { Nome: 'Alerta 1', Plano: 'Plano 1',  Status:'Ativo'},
-            { Nome: 'Alerta 2', Plano: 'Plano 2',  Status:'Ativo'},
-            { Nome: 'Alerta 3', Plano: 'Plano 3',  Status:'Ativo'},
-            { Nome: 'Alerta 4', Plano: 'Plano 4',  Status:'Ativo'},
-            { Nome: 'Alerta 5', Plano: 'Plano 5',  Status:'Ativo'},
-            { Nome: 'Alerta 6', Plano: 'Plano 6',  Status:'Ativo'},
-            { Nome: 'Alerta 7', Plano: 'Plano 7',  Status:'Ativo'},
-        ],
-    ];
+    const backendUrl = 'http://localhost:8090'
+    const [dadosAlertas, setDadosAlertas] = useState([]);
+
+    useEffect(() => {
+        fetchDataFromBackend();
+    }, []);
+
+    useEffect(() => {
+        console.log('Dados atualizados:', dadosAlertas);
+    }, [dadosAlertas]);
+
+    function fetchDataFromBackend() {
+        fetch(`${backendUrl}/api/mhu/alert`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosFormatados = data.map(item => ({
+                    Id: item.id,
+                    Tipo: item.type === 'ALERT_BY_WARRANTY' ? 'Garantia' : 'Plano de Manutenção',
+                    Titulo: item.title,
+                    Status: item.status === 'PENDING' ? 'Pendente' : 'Atendido'
+                }));
+
+                setDadosAlertas([dadosFormatados]);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
     return (
         <div className="">
             <Highbar/>
-            <LayoutConsulta titulo="Alertas" valorUrlAdicionar="alerta" dados={dados}/>
+            <LayoutConsulta titulo="Alertas" valorUrlAdicionar="alerta" dados={dadosAlertas}/>
             <Bottombar/>
         </div>
     );

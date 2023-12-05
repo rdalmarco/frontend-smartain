@@ -2,127 +2,148 @@ import React, { useState, useEffect } from "react";
 import LayoutCadastro from "../../componentes/layoutCadastro";
 import Highbar from "../../componentes/highbar";
 import Bottombar from "../../componentes/bottombar";
-import FormsCadastro from "../../componentes/formsCadastro";
 import FormsAlterar from "../../componentes/formsAlterar";
 import {useParams} from "react-router-dom";
 
 function TelaAlterarAlerta() {
     const backendUrl = 'http://localhost:8090'
-    //Const para armazenar as opções da lista
-    const [citys, setCitys] = useState([]);
-    const [types, setTypes] = useState([]);
-    const [dadosUnidade, setDadosUnidade] = useState([]);
+    const [machines, setMachines] = useState([]);
+    const [plans, setPlans] = useState([]);
+    const [dadosAlert, setDadosAlert] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchValues();
-        fetchCity();
-        fetchType();
+        fetchMachine();
+        fetchPlans();
     }, []);
 
     function fetchValues() {
-        fetch(`${backendUrl}/api/glo/manufacturingUnit/${id}`)
+        fetch(`${backendUrl}/api/mhu/alert/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-                // Mapeia os dados recebidos do backend para o formato desejado
                 const dadosFormatadosAlterar = {
                     Id: data.id,
-                    Nome: data.tag,
-                    Cidade: data.city.id.cityId,
-                    Tipo: data.type.id,
-                    Status: data.status,
-                    Address: data.address,
+                    Tipo: data.type,
+                    Titulo: data.title,
+                    Descricao: data.description,
+                    Usuario: data.createdUser ? data.createdUser.id : null,
+                    Criacao: data.createdDate,
+                    Expiracao: data.expirationDate,
+                    Maquina: data.machine ? data.machine.id : null,
+                    Plano: data.plan ? data.plan.id : null,
+                    Status: data.status
                 };
 
                 console.log('XZ', dadosFormatadosAlterar)
-                // Atualiza o estado usando setDadosUnidades
-                setDadosUnidade([dadosFormatadosAlterar]);
+                setDadosAlert([dadosFormatadosAlterar]);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
-    function fetchCity() {
-        fetch(`${backendUrl}/api/glo/city`)
+    function fetchMachine() {
+        fetch(`${backendUrl}/api/mhu/machine`)
             .then(response => response.json())
             .then(data => {
                 console.log('Dados recebidos do backend:', data);
 
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosCity = data.map(item => ({
-                    Id: item.id.cityId,
-                    Nome: item.name
-                }));
-
-                // Atualiza o estado usando setDadosUnidades
-                setCitys(dadosCity);
-            })
-            .catch(error => console.error('Erro ao fazer solicitação:', error));
-    }
-
-    function fetchType() {
-        fetch(`${backendUrl}/api/mhu/unitType`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dados recebidos do backend:', data);
-
-
-                // Mapeia os dados recebidos do backend para o formato desejado
-                const dadosType = data.map(item => ({
+                const dadosMachine = data.map(item => ({
                     Id: item.id,
-                    Nome: item.name
+                    Nome: item.tag,
+                    Garantia: item.warrantyExpDate
                 }));
+                setMachines(dadosMachine);
+            })
+            .catch(error => console.error('Erro ao fazer solicitação:', error));
+    }
 
-                // Atualiza o estado usando setDadosUnidades
-                setTypes(dadosType);
+    function fetchPlans() {
+        fetch(`${backendUrl}/api/mpp/maintenancePlan`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados recebidos do backend:', data);
+
+                const dadosPlans = data.map(item => ({
+                    Id: item.id,
+                    Nome: item.name,
+                }));
+                setPlans(dadosPlans);
             })
             .catch(error => console.error('Erro ao fazer solicitação:', error));
     }
 
     const camposFormulario = [
         {
-            tipo: 'hidden',
-            label: 'customerId',
-            tipoCampo: 'text',
-            value: 1,
+            tipo: 'select',
+            label: 'type',
+            placeholder: 'Tipo do Alerta',
+            opcoes: [
+                { value: 1, label: 'Alerta de Garantia' },
+                { value: 2, label: 'Alerta Cadastrado pelo Usuário' }
+            ],
+            value: dadosAlert && dadosAlert.length > 0 && dadosAlert[0].Tipo === 'ALERT_BY_WARRANTY' ? 1 : 2,
             tipoValue: 'int',
         },
         {
             tipo: 'input',
-            label: 'tag',
+            label: 'title',
+            placeholder: 'Título do Alerta',
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Titulo : '',
             tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Nome : '',
+        },
+        {
+            tipo: 'textarea',
+            label: 'description',
+            placeholder: 'Descrição do Alerta',
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Descricao : '',
+            tipoCampo: 'text',
+        },
+        {
+            tipo: 'inputDate',
+            label: 'expirationDate',
+            placeholder: 'Data de expiração do alerta',
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Expiracao : '',
+            tipoCampo: 'date',
         },
         {
             tipo: 'select',
-            label: 'cityId',
-            opcoes: citys.map(city => ({ value: city.Id, label: city.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Cidade : '',
+            label: 'machineId',
+            placeholder: 'Máquina',
+            opcoes: machines.map(machine => ({ value: machine.Id, label: machine.Nome })),
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Maquina : '',
             tipoValue: 'int',
-        },
-        {
-            tipo: 'input',
-            label: 'address',
-            tipoCampo: 'text',
-            value: dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Address : '',
         },
         {
             tipo: 'select',
-            label: 'typeId',
-            opcoes: types.map(type => ({ value: type.Id, label: type.Nome })),
-            value : dadosUnidade && dadosUnidade.length > 0 ? dadosUnidade[0].Tipo : '',
+            label: 'plan',
+            placeholder: 'Plano de Manutenção',
+            opcoes: plans.map(plan => ({ value: plan.Id, label: plan.Nome })),
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Plano : '',
             tipoValue: 'int',
+        },
+        {
+            tipo: 'select',
+            label: 'userId',
+            placeholder: 'Usuário de Criação',
+            opcoes: dadosAlert && dadosAlert.length > 0
+                ? (dadosAlert[0].Usuario
+                    ? [{ value: dadosAlert[0].Usuario, label: dadosAlert[0].Usuario }]
+                    : [{ value: 0, label: 'Criada Automaticamente' }])
+                : [{ value: 0, label: 'Criada Automaticamente' }],
+            tipoValue: 'int',
+            value: dadosAlert && dadosAlert.length > 0 ? dadosAlert[0].Solicitacao : '0',
         },
         {
             tipo: 'select',
             label: 'status',
+            placeholder: 'Status',
             opcoes: [
-                { value: 0, label: 'Ativo' },
-                { value: 1, label: 'Inativo' }
+                { value: 1, label: 'Pendente' },
+                { value: 2, label: 'Atendido' }
             ],
-            value: dadosUnidade && dadosUnidade.length > 0 && dadosUnidade[0].Status === 'ACTIVE' ? 0 : 1,
+            value: dadosAlert && dadosAlert.length > 0 && dadosAlert[0].Status === 'PENDING' ? 1 : 2,
             tipoValue: 'int',
         },
     ];
@@ -131,7 +152,7 @@ function TelaAlterarAlerta() {
         <div className="tittleAlterarAlerta">
             <Highbar/>
             <LayoutCadastro titulo="Alerta" valorUrlAdicionar="alerta">
-                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/glo/`} />
+                <FormsAlterar campos={camposFormulario} backEndUrl = {`${backendUrl}/api/mhu/alert`} />
             </LayoutCadastro>
             <Bottombar/>
         </div>
