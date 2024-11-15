@@ -11,7 +11,7 @@
 .empresa {
     display: inline-block;
     position: relative;
-    left: 51%;
+    left: 50%;
     transform: translateX(-50%);
     font-weight: bold;
 }
